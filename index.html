@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>zero-carbon — Chalk Invert Scheme for India's Net-Zero Transition</title>
+    <meta name="description" content="Specialist carbon market advisory helping Indian industries navigate CCTS compliance, CBAM readiness, and strategic decarbonisation.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #f8f6f1;
+            --dark: #eeece7;
+            --carbon: #e2e0db;
+            --graphite: #c8c6c0;
+            --slate: #8a8880;
+            --silver: #5a5855;
+            --light: #2a2826;
+            --white: #0f0e0c;
+            --green: #007a32;
+            --green-dim: #005c24;
+            --green-glow: rgba(0,122,50,0.10);
+            --amber: #c87800;
+            --amber-dim: rgba(200,120,0,0.10);
+            --red-accent: #ff3d00;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--graphite) var(--dark);
+            -webkit-text-size-adjust: 100%;
+            overscroll-behavior: none;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--black);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* ========== GRAIN OVERLAY ========== */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h1, h2, h3, .display {
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .label {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            max-width: 100%;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-label--right {
+            flex-direction: row-reverse;
+        }
+
+        .section-label--center {
+            justify-content: center;
+        }
+
+        .section-label--center .section-label-line:first-child {
+            background: linear-gradient(to right, transparent, var(--green));
+        }
+
+        .section-label--center .section-label-line:last-child {
+            background: linear-gradient(to left, transparent, var(--green));
+        }
+
+        .section-label span {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--green);
+            white-space: nowrap;
+        }
+
+        .section-label-line {
+            height: 1px;
+            flex: 1;
+            min-width: 2rem;
+        }
+
+        .section-label--left .section-label-line {
+            background: linear-gradient(to right, var(--green), transparent);
+        }
+
+        .section-label--right .section-label-line {
+            background: linear-gradient(to left, var(--green), transparent);
+        }
+
+        /* ========== NAVIGATION ========== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(248,246,241,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.9rem 3rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+            text-decoration: none;
+            color: var(--white);
+            flex-direction: column;
+        }
+
+        .logo-main {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo-mark::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: var(--green);
+            border-radius: 0 0 50% 50%;
+        }
+
+        .logo-text {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo-sub {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+            padding-left: 48px;
+            margin-top: 1px;
+        }
+
+        .logo-sub-part {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--slate);
+        }
+
+        .logo-sub-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #2a4a30;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-sub-hindi {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 500;
+            color: #5a7a60;
+            letter-spacing: 3px;
+        }
+
+        .logo-sub-sep {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.62rem;
+            font-weight: 300;
+            color: #c8c6c0;
+        }
+
+
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--silver);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--white); }
+
+        .nav-cta {
+            background: var(--green);
+            color: var(--black) !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 4px;
+            font-weight: 600 !important;
+            transition: all 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            background: var(--green-dim) !important;
+            color: var(--black) !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--white);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 3rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(0,122,50,0.08) 0%, transparent 70%);
+            pointer-events: none;
+            animation: pulse-glow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+
+        .hero-eyebrow .line {
+            width: 40px;
+            height: 1px;
+            background: var(--green);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 6rem);
+            max-width: 900px;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--green);
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            max-width: 620px;
+            color: var(--silver);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.8s;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: var(--green);
+            color: var(--black);
+            border: none;
+            border-radius: 4px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-dim);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: transparent;
+            color: var(--white);
+            border: 1px solid var(--silver);
+            border-radius: 4px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--silver);
+            background: rgba(255,255,255,0.03);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== URGENCY TICKER ========== */
+        .ticker-wrap {
+            border-top: 1px solid var(--graphite);
+            border-bottom: 1px solid var(--graphite);
+            padding: 1.2rem 0;
+            overflow: hidden;
+            background: var(--dark);
+        }
+
+        .ticker {
+            display: flex;
+            gap: 4rem;
+            animation: scroll-ticker 30s linear infinite;
+            width: max-content;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .ticker-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.6rem;
+            color: var(--green);
+        }
+
+        .ticker-text {
+            font-size: 0.78rem;
+            color: var(--silver);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .ticker-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--graphite);
+            border-radius: 50%;
+        }
+
+        @keyframes scroll-ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ========== SECTIONS ========== */
+        section {
+            padding: 7rem 3rem;
+            overflow-x: hidden;
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            color: var(--white);
+            margin-top: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--silver);
+            margin-top: 1.25rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* ========== WHY NOW ========== */
+        #why-now {
+            background: var(--dark);
+            position: relative;
+        }
+
+        .crisis-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--graphite);
+            border: 1px solid var(--graphite);
+            margin-bottom: 4rem;
+        }
+
+        .crisis-card {
+            background: var(--dark);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .crisis-card:hover {
+            background: var(--carbon);
+        }
+
+        .crisis-num {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3.5rem;
+            color: var(--green);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .crisis-unit {
+            font-size: 1.2rem;
+            color: var(--green-dim);
+            font-weight: 500;
+        }
+
+        .crisis-desc {
+            font-size: 0.88rem;
+            color: var(--silver);
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .crisis-source {
+            font-size: 0.68rem;
+            color: var(--slate);
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
+        .bridge-banner {
+            background: linear-gradient(135deg, rgba(0,122,50,0.06), rgba(200,120,0,0.04));
+            border: 1px solid rgba(0, 200, 83, 0.15);
+            border-radius: 6px;
+            padding: 3rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .bridge-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Instrument Serif', serif;
+            font-size: 2rem;
+            color: var(--green);
+        }
+
+        .bridge-text h3 {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .bridge-text p {
+            color: var(--silver);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ========== SERVICES ========== */
+        #services {
+            background: var(--black);
+        }
+
+        .service-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--graphite);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .service-hero-card {
+            background: var(--carbon);
+            padding: 3.5rem;
+            position: relative;
+        }
+
+        .service-hero-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--green);
+        }
+
+        .service-tag {
+            display: inline-block;
+            padding: 0.3rem 0.75rem;
+            background: var(--green-glow);
+            border: 1px solid rgba(0,122,50,0.25);
+            border-radius: 3px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-hero-card h3 {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .service-hero-card p {
+            color: var(--silver);
+            font-size: 0.92rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-scope {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-scope li {
+            padding: 0.6rem 0;
+            border-top: 1px solid var(--graphite);
+            font-size: 0.85rem;
+            color: var(--light);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .service-scope li::before {
+            content: '→';
+            color: var(--green);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--graphite);
+            border: 1px solid var(--graphite);
+        }
+
+        .service-card {
+            background: var(--black);
+            padding: 2.5rem 2rem;
+            transition: background 0.3s;
+            cursor: default;
+        }
+
+        .service-card:hover {
+            background: var(--carbon);
+        }
+
+        .service-card-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(0, 200, 83, 0.15);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+        }
+
+        .service-card-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .service-card h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.15rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            font-weight: 400;
+        }
+
+        .service-card p {
+            font-size: 0.82rem;
+            color: var(--silver);
+            line-height: 1.6;
+        }
+
+        /* ========== ANALYTICS STRIP ========== */
+        .analytics-strip {
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .analytics-strip-header {
+            margin-bottom: 1.75rem;
+        }
+
+        .analytics-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            border: 1px solid rgba(0,122,50,0.15);
+            border-radius: 6px;
+            overflow: hidden;
+            background: rgba(0,122,50,0.03);
+        }
+
+        .analytics-card {
+            padding: 2rem;
+            position: relative;
+            border-right: 1px solid rgba(0,122,50,0.10);
+            transition: background 0.3s;
+        }
+
+        .analytics-card:last-child {
+            border-right: none;
+        }
+
+        .analytics-card:hover {
+            background: rgba(0,122,50,0.05);
+        }
+
+        .analytics-card-top {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .analytics-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .analytics-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .analytics-card h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.05rem;
+            color: var(--white);
+            font-weight: 400;
+            line-height: 1.3;
+        }
+
+        .analytics-card p {
+            font-size: 0.8rem;
+            color: var(--silver);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .analytics-cards { grid-template-columns: 1fr; }
+            .analytics-card { border-right: none; border-bottom: 1px solid rgba(0,122,50,0.10); }
+            .analytics-card:last-child { border-bottom: none; }
+        }
+
+        @media (max-width: 768px) {
+            .analytics-strip { margin: 2rem 0; }
+            .analytics-card { padding: 1.5rem; }
+            .analytics-strip-header .section-label span {
+                white-space: normal;
+                font-size: 0.58rem;
+                line-height: 1.5;
+            }
+        }
+
+        /* ========== SECTORS ========== */
+        #sectors {
+            background: var(--dark);
+        }
+
+        .sector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .sector-item {
+            border: 1px solid var(--graphite);
+            border-radius: 4px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            transition: all 0.3s;
+            background: var(--dark);
+        }
+
+        .sector-item:hover {
+            border-color: var(--green);
+            background: rgba(0,122,50,0.03);
+        }
+
+        .sector-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--carbon);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .sector-info h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.35rem;
+        }
+
+        .sector-info p {
+            font-size: 0.8rem;
+            color: var(--slate);
+            line-height: 1.5;
+        }
+
+        .sector-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+        }
+
+        .badge-ccts {
+            background: var(--green-glow);
+            color: var(--green);
+            border: 1px solid rgba(0,200,83,0.15);
+        }
+
+        .badge-cbam {
+            background: var(--amber-dim);
+            color: var(--amber);
+            border: 1px solid rgba(255,171,0,0.15);
+        }
+
+        /* ========== APPROACH ========== */
+        #approach {
+            background: var(--black);
+        }
+
+        .approach-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+            position: relative;
+        }
+
+        .approach-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--green), transparent);
+        }
+
+        .approach-step {
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 2px solid var(--green);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.4rem;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+            background: var(--dark);
+            position: relative;
+            z-index: 2;
+        }
+
+        .approach-step h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.2rem;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+        }
+
+        .approach-step p {
+            font-size: 0.85rem;
+            color: var(--silver);
+            line-height: 1.6;
+        }
+
+        /* ========== ABOUT ========== */
+        #about {
+            background: var(--dark);
+            position: relative;
+        }
+
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--silver);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+        .about-content p strong {
+            color: var(--light);
+        }
+
+        .about-pillars {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: var(--graphite);
+            border: 1px solid var(--graphite);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .pillar {
+            background: var(--dark);
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            transition: background 0.3s;
+        }
+
+        .pillar:hover {
+            background: var(--carbon);
+        }
+
+        .pillar-icon {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--green);
+            flex-shrink: 0;
+            font-size: 0.85rem;
+        }
+
+        .pillar h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.35rem;
+        }
+
+        .pillar p {
+            font-size: 0.82rem;
+            color: var(--slate);
+            line-height: 1.5;
+        }
+
+        /* ========== PRANGARIYA BLOCK ========== */
+        .prangariya-section {
+            background: var(--dark);
+        }
+
+        .prangariya-block {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .prangariya-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 3rem;
+        }
+
+        .prangariya-tree {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+        }
+
+        .prangariya-tree svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .prangariya-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.25rem;
+        }
+
+        .prangariya-name-hindi {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--silver);
+            letter-spacing: 3px;
+            margin-bottom: 1.25rem;
+        }
+
+        .prangariya-essence {
+            font-size: 0.95rem;
+            color: var(--light);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        .prangariya-etymology {
+            font-size: 0.82rem;
+            color: var(--silver);
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .prangariya-etymology em {
+            font-style: normal;
+            color: var(--green);
+        }
+
+        .prangariya-branches {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0;
+            border: 1px solid var(--graphite);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .prangariya-branch {
+            padding: 1.75rem 1.5rem;
+            border-right: 1px solid var(--graphite);
+            transition: background 0.3s;
+        }
+
+        .prangariya-branch:last-child {
+            border-right: none;
+        }
+
+        .prangariya-branch:hover {
+            background: rgba(0,0,0,0.02);
+        }
+
+        .prangariya-branch.active {
+            background: rgba(0,122,50,0.05);
+            border-bottom: 2px solid var(--green);
+        }
+
+        .prangariya-branch-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1rem;
+            color: var(--white);
+            margin-bottom: 0.2rem;
+        }
+
+        .prangariya-branch-name sup {
+            font-size: 0.6em;
+            line-height: 0;
+            vertical-align: super;
+        }
+
+        .prangariya-branch.active .prangariya-branch-name {
+            color: var(--green);
+        }
+
+        .prangariya-branch-tag {
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 0.75rem;
+            display: none;
+        }
+
+        .prangariya-branch.active .prangariya-branch-tag {
+            display: block;
+        }
+
+        .prangariya-branch-tag.dev {
+            display: block;
+            color: var(--silver);
+            opacity: 0.6;
+        }
+
+        .prangariya-branch-tag.live {
+            display: block;
+            color: var(--green);
+            opacity: 0.7;
+        }
+
+        .prangariya-branch-desc {
+            font-size: 0.78rem;
+            color: var(--silver);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .prangariya-branches {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .prangariya-branch:nth-child(3),
+            .prangariya-branch:nth-child(6) { border-right: none; }
+            .prangariya-branch:nth-child(1),
+            .prangariya-branch:nth-child(2),
+            .prangariya-branch:nth-child(3) { border-bottom: 1px solid var(--graphite); }
+        }
+
+        @media (max-width: 768px) {
+            .prangariya-branches { grid-template-columns: 1fr; }
+            .prangariya-branch { border-right: none; border-bottom: 1px solid var(--graphite); }
+            .prangariya-branch:last-child { border-bottom: none; }
+            .prangariya-name { font-size: 1.2rem; }
+        }
+
+        /* ========== INSIGHTS PLACEHOLDER ========== */
+        #insights {
+            background: var(--black);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .insight-card {
+            border: 1px solid var(--graphite);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .insight-card:hover {
+            border-color: var(--green);
+            transform: translateY(-3px);
+        }
+
+        .insight-img {
+            height: 180px;
+            background: var(--carbon);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--graphite);
+        }
+
+        .insight-img span {
+            font-size: 2.5rem;
+            opacity: 0.3;
+        }
+
+        .insight-body {
+            padding: 1.5rem;
+        }
+
+        .insight-date {
+            font-size: 0.7rem;
+            color: var(--slate);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+        }
+
+        .insight-body h4 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.1rem;
+            color: var(--white);
+            font-weight: 400;
+            line-height: 1.35;
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-body p {
+            font-size: 0.8rem;
+            color: var(--slate);
+            line-height: 1.5;
+        }
+
+        /* ========== CONTACT ========== */
+        #contact {
+            background: var(--dark);
+        }
+
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+        }
+
+        .contact-info h2 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            color: var(--white);
+            margin-bottom: 1.25rem;
+        }
+
+        .contact-info > p {
+            color: var(--silver);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-detail {
+            padding: 1.25rem 0;
+            border-top: 1px solid var(--graphite);
+        }
+
+        .contact-detail .label {
+            margin-bottom: 0.4rem;
+        }
+
+        .contact-detail a,
+        .contact-detail span {
+            color: var(--light);
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .contact-detail a:hover {
+            color: var(--green);
+        }
+
+        .contact-form {
+            background: var(--carbon);
+            border: 1px solid var(--graphite);
+            border-radius: 6px;
+            padding: 2.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--dark);
+            border: 1px solid var(--graphite);
+            border-radius: 4px;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--green);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-group select option {
+            background: var(--dark);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: var(--green);
+            color: var(--black);
+            border: none;
+            border-radius: 4px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .form-submit:hover {
+            background: var(--green-dim);
+        }
+
+        /* ========== CTA BANNER ========== */
+        .cta-banner {
+            background: var(--green);
+            padding: 5rem 3rem;
+            text-align: center;
+        }
+
+        .cta-banner h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .cta-banner p {
+            color: rgba(0,0,0,0.65);
+            font-size: 1.05rem;
+            max-width: 550px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn-dark {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2.5rem;
+            background: var(--black);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .btn-dark:hover {
+            background: var(--carbon);
+            transform: translateY(-1px);
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: var(--black);
+            padding: 3rem 3rem 2rem;
+            border-top: 1px solid var(--graphite);
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .footer-col h5 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--silver);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col a {
+            display: block;
+            color: var(--slate);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--white); }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--graphite);
+        }
+
+        .footer-bottom p {
+            font-size: 0.75rem;
+            color: var(--slate);
+        }
+
+        /* ========== SCROLL REVEAL ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .crisis-grid { grid-template-columns: repeat(2, 1fr); }
+            .service-grid { grid-template-columns: repeat(2, 1fr); }
+            .sector-grid { grid-template-columns: repeat(2, 1fr); }
+            .insights-grid { grid-template-columns: repeat(2, 1fr); }
+            .approach-steps { grid-template-columns: 1fr; gap: 2rem; }
+            .approach-steps::before { display: none; }
+            .service-hero { grid-template-columns: 1fr; }
+            .about-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.75rem 1.25rem;
+            }
+
+            nav.scrolled {
+                padding: 0.6rem 1.25rem;
+            }
+
+            /* Logo mobile adjustments */
+            .logo-main {
+                gap: 0.4rem;
+            }
+
+            .logo-mark {
+                width: 28px;
+                height: 28px;
+            }
+
+            .logo-text {
+                font-size: 0.95rem;
+            }
+
+            .logo-sub {
+                padding-left: 32px;
+                gap: 3px;
+            }
+
+            .logo-sub-part { font-size: 0.55rem; }
+            .logo-sub-name { font-size: 0.68rem; }
+            .logo-sub-hindi { font-size: 0.52rem; letter-spacing: 2px; }
+
+            /* Mobile nav menu */
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--black);
+                flex-direction: column;
+                padding: 1.5rem;
+                border-bottom: 1px solid var(--graphite);
+                gap: 0.5rem;
+            }
+
+            .nav-links.open { display: flex; }
+
+            .nav-links li { list-style: none; }
+
+            .nav-links a {
+                display: block;
+                padding: 0.6rem 0;
+                font-size: 0.95rem;
+            }
+
+            .nav-cta {
+                text-align: center;
+                margin-top: 0.5rem;
+            }
+
+            .menu-toggle { display: block; }
+
+            /* Sections */
+            section { padding: 3.5rem 1.25rem; }
+
+            .hero { padding: 6.5rem 1.25rem 2.5rem; }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-sub {
+                font-size: 0.95rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .hero-actions .btn-primary,
+            .hero-actions .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero::before {
+                width: 400px;
+                height: 400px;
+                top: -20%;
+                right: -20%;
+            }
+
+            /* Section headers */
+            .section-header {
+                margin-bottom: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-header p {
+                font-size: 0.92rem;
+            }
+
+            /* Crisis grid */
+            .crisis-grid { grid-template-columns: 1fr; }
+
+            .crisis-card {
+                padding: 1.75rem;
+            }
+
+            .crisis-num { font-size: 2.8rem; }
+
+            /* Bridge banner */
+            .bridge-banner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+                padding: 2rem 1.5rem;
+            }
+
+            .bridge-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .bridge-text h3 { font-size: 1.25rem; }
+            .bridge-text p { font-size: 0.88rem; }
+
+            /* Services */
+            .service-hero { grid-template-columns: 1fr; }
+
+            .service-hero-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .service-hero-card h3 { font-size: 1.4rem; }
+
+            .service-grid { grid-template-columns: 1fr; }
+
+            .service-card {
+                padding: 1.75rem 1.5rem;
+            }
+
+            /* Sectors */
+            .sector-grid { grid-template-columns: 1fr; }
+
+            .sector-item {
+                padding: 1.5rem;
+            }
+
+            /* Approach */
+            .approach-step {
+                padding: 0 0.5rem;
+            }
+
+            /* About */
+            .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+
+            .about-content h2 { font-size: 1.8rem; }
+
+            .about-content p { font-size: 0.9rem; }
+
+            .pillar {
+                padding: 1.5rem;
+            }
+
+            /* Insights */
+            .insights-grid { grid-template-columns: 1fr; }
+
+            .insight-img { height: 140px; }
+
+            /* Contact */
+            .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+
+            .contact-info h2 { font-size: 1.8rem; }
+
+            .contact-form {
+                padding: 1.75rem 1.5rem;
+            }
+
+            .form-row { grid-template-columns: 1fr; }
+
+            /* CTA Banner */
+            .cta-banner {
+                padding: 3rem 1.25rem;
+            }
+
+            .cta-banner h2 { font-size: 1.8rem; }
+
+            /* Footer */
+            .footer-top { flex-direction: column; gap: 2rem; }
+            .footer-links { flex-direction: column; gap: 1.5rem; }
+            .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+
+            /* Ticker mobile */
+            .ticker-wrap { padding: 0.9rem 0; }
+            .ticker { gap: 2.5rem; }
+            .ticker-num { font-size: 1.3rem; }
+            .ticker-text { font-size: 0.68rem; }
+
+            /* Disable grain overlay on mobile for performance */
+            body::after {
+                display: none;
+            }
+        }
+
+        /* Small phones */
+        @media (max-width: 400px) {
+            .hero h1 { font-size: 1.8rem; }
+            .logo-sub { padding-left: 32px; gap: 2px; flex-wrap: wrap; }
+            .crisis-num { font-size: 2.2rem; }
+            section { padding: 3rem 1rem; }
+            .hero { padding: 6rem 1rem 2rem; }
+            .service-hero-card { padding: 1.5rem 1.25rem; }
+            .contact-form { padding: 1.5rem 1.25rem; }
+        }
+
+        /* Touch target minimums (48px) for Android/mobile */
+        @media (pointer: coarse) {
+            .nav-links a {
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-secondary,
+            .btn-dark,
+            .form-submit,
+            .nav-cta {
+                min-height: 48px;
+            }
+
+            .menu-toggle {
+                min-width: 48px;
+                min-height: 48px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                min-height: 48px;
+            }
+
+            .footer-col a {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .ticker {
+                animation: none;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            .hero-eyebrow,
+            .hero h1,
+            .hero-sub,
+            .hero-actions {
+                opacity: 1;
+                transform: none;
+                animation: none;
+            }
+        }
+
+        /* Samsung Internet / older Android fix for safe areas */
+        @supports (padding: env(safe-area-inset-top)) {
+            nav {
+                padding-top: max(0.75rem, env(safe-area-inset-top));
+                padding-left: max(1.25rem, env(safe-area-inset-left));
+                padding-right: max(1.25rem, env(safe-area-inset-right));
+            }
+
+            footer {
+                padding-bottom: max(2rem, env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="navbar">
+    <a href="#" class="logo">
+        <div class="logo-main">
+            <div class="logo-mark"></div>
+            <div class="logo-text">Zero Carbon</div>
+        </div>
+        <div class="logo-sub">
+            <span class="logo-sub-part">part of</span>
+            <span class="logo-sub-name">Prāngārīya</span>
+            <span class="logo-sub-sep">|</span><span class="logo-sub-hindi">प्रां गा री या</span>
+        </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#why-now">Why Now</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#sectors">Sectors</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="hero">
+    <div class="hero-eyebrow">
+        <span class="line"></span>
+        <span class="label">Carbon Credits and Climate Advisory</span>
+    </div>
+    <h1>India's carbon market inflection is&nbsp;<em>now.</em></h1>
+    <p class="hero-sub">
+        800+ industrial entities face mandatory carbon compliance for the first time in phase 1. 
+        The EU CBAM is reshaping export economics. And a $3.5 trillion climate investment 
+        gap demands new financial architecture. We help you navigate all of it.
+    </p>
+    <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Request a Free Assessment ↗</a>
+        <a href="#services" class="btn-secondary">Explore Our Services</a>
+    </div>
+</section>
+
+<!-- ========== TICKER ========== -->
+<div class="ticker-wrap">
+    <div class="ticker" id="ticker">
+        <div class="ticker-item"><span class="ticker-num">$35T</span><span class="ticker-text">Potential climate inaction losses by 2070</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">$10.1T</span><span class="ticker-text">Investment needed for India's net-zero goal by 2070</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">$3.5T</span><span class="ticker-text">Climate investment gap</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">2026</span><span class="ticker-text">India's Carbon Credit Trading Scheme (CCTS) goes live</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">9</span><span class="ticker-text">Industrial sectors covered</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">800+</span><span class="ticker-text">Entities under CCTS compliance</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <!-- duplicate for seamless loop -->
+        <div class="ticker-item"><span class="ticker-num">$35T</span><span class="ticker-text">Potential climate inaction losses by 2070</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">$10.1T</span><span class="ticker-text">Investment needed for India's net-zero goal by 2070</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">$3.5T</span><span class="ticker-text">Climate investment gap</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">2026</span><span class="ticker-text">India's Carbon Credit Trading Scheme (CCTS) goes live</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">9</span><span class="ticker-text">Industrial sectors covered</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+        <div class="ticker-item"><span class="ticker-num">800+</span><span class="ticker-text">Entities under CCTS compliance</span></div>
+        <div class="ticker-item"><span class="ticker-dot"></span></div>
+    </div>
+</div>
+
+<!-- ========== WHY NOW ========== -->
+<section id="why-now">
+    <div class="section-label section-label--left reveal"><span>The Urgency</span><div class="section-label-line"></div></div>
+    <div class="section-header reveal">
+        <h2>A $10.1 trillion transition cannot wait</h2>
+        <p>India needs $10.1 trillion in cumulative investment to reach net-zero by 2070. 
+        Conventional capital sources cover only $6.6 trillion — leaving a $3.5 trillion gap 
+        that demands new mechanisms, new markets, and new thinking.</p>
+    </div>
+
+    <div class="crisis-grid reveal">
+        <div class="crisis-card">
+            <div class="crisis-num">$10.1<span class="crisis-unit">T</span></div>
+            <div class="crisis-desc">Cumulative investment required for India to decarbonise power, industry, and transport sectors and achieve net-zero by 2070.</div>
+            <div class="crisis-source">Source: CEEW-CEF, 2021</div>
+        </div>
+        <div class="crisis-card">
+            <div class="crisis-num">$3.5<span class="crisis-unit">T</span></div>
+            <div class="crisis-desc">Investment shortfall that conventional domestic and foreign capital cannot bridge. Concessional finance of $1.4 trillion is required from developed economies.</div>
+            <div class="crisis-source">Source: CEEW-CEF, 2021</div>
+        </div>
+        <div class="crisis-card">
+            <div class="crisis-num">$45<span class="crisis-unit">B</span></div>
+            <div class="crisis-desc">India's current annual climate investment — against an estimated need of $170 billion per year to meet NDC commitments by 2030.</div>
+            <div class="crisis-source">Source: ICF / MoEFCC estimates</div>
+        </div>
+        <div class="crisis-card">
+            <div class="crisis-num">28<span class="crisis-unit">%</span></div>
+            <div class="crisis-desc">Share of Asia's regional emissions currently covered by carbon pricing — despite the continent accounting for over 50% of global emissions.</div>
+            <div class="crisis-source">Source: WEF × Bain & Company, 2025</div>
+        </div>
+        <div class="crisis-card">
+            <div class="crisis-num">800<span class="crisis-unit">+</span></div>
+            <div class="crisis-desc">Industrial entities across nine sectors that will face mandatory emissions intensity targets under India's Carbon Credit Trading Scheme (CCTS) from 2026.</div>
+            <div class="crisis-source">Source: BEE / CCTS framework</div>
+        </div>
+        <div class="crisis-card">
+            <div class="crisis-num">$35<span class="crisis-unit">T</span></div>
+            <div class="crisis-desc">Estimated climate inaction losses India could face by 2070. A well-functioning carbon market is essential to catalysing mitigation investment at scale.</div>
+            <div class="crisis-source">Source: Bhandari et al. / ScienceDirect, 2025</div>
+        </div>
+    </div>
+
+    <div class="bridge-banner reveal">
+        <div class="bridge-icon">⟷</div>
+        <div class="bridge-text">
+            <h3>CCTS: The Bridge India Needs</h3>
+            <p>India's Carbon Credit Trading Scheme is the country's first policy instrument to directly target CO₂ emissions. 
+            CEEW's modelling shows that even initial CCTS targets can be met through low or negative-cost abatement — 
+            meaning industries save money while cutting emissions. As the scheme scales, it creates the carbon price signal 
+            that India's financial system needs to assess transition risk, direct capital, and unlock the $3.5 trillion gap. 
+            The EU ETS has generated over $109 billion in auction revenue since 2013. CCTS can become India's equivalent engine 
+            for climate finance — but only if entities engage strategically from the start.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section id="services">
+    <div class="section-label section-label--right reveal"><span>What We Do</span><div class="section-label-line"></div></div>
+    <div class="section-header reveal">
+        <h2>Compliance today.<br>Strategy tomorrow.</h2>
+        <p>We help Indian industrials move from reactive compliance to proactive decarbonisation — 
+        turning carbon obligations into competitive advantage.</p>
+    </div>
+
+    <!-- Primary Services -->
+    <div class="service-hero reveal">
+        <div class="service-hero-card">
+            <h3>CCTS Compliance Readiness</h3>
+            <p>India's compliance carbon market launches trading in 2026, covering 800+ entities 
+            across nine industrial sectors. Most mid-tier obligated entities lack the internal 
+            capability to navigate MRV requirements, emission intensity targets, and CCC trading 
+            mechanics. We close that gap.</p>
+            <ul class="service-scope">
+                <li>Baseline emission intensity assessment and gap analysis against BEE-notified targets</li>
+                <li>MRV system design and implementation support</li>
+                <li>CCC surplus/deficit modelling and trading strategy</li>
+                <li>Mandatory compliance documentation for BEE submission</li>
+                <li>Internal team training on CCTS framework, exchange mechanics, and registry processes</li>
+            </ul>
+        </div>
+        <div class="service-hero-card">
+            <h3>CBAM Compliance & Documentation</h3>
+            <p>The EU Carbon Border Adjustment Mechanism is fully operational in 2026. 
+            Indian MSME exporters face installation-level emission calculations, CBAM-compliant 
+            reporting, and the challenge of documenting domestic carbon prices paid under CCTS 
+            for deduction claims. We make this manageable.</p>
+            <ul class="service-scope">
+                <li>Installation-level embedded emission calculations per EU methodology</li>
+                <li>CBAM-compliant reporting and documentation preparation</li>
+                <li>Domestic carbon price documentation for CBAM deduction claims</li>
+                <li>Ongoing compliance monitoring as CBAM scope expands</li>
+                <li>Export risk assessment across EU-bound product categories</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Secondary Services -->
+    <div class="service-grid reveal">
+        <div class="service-card">
+            <div class="service-card-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 28L4 8" stroke="#00c853" stroke-width="1.5" stroke-linecap="round"/><path d="M4 24L10 16L16 20L22 10L28 6" stroke="#00c853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="16" r="2" fill="#00c853" opacity="0.3"/><circle cx="16" cy="20" r="2" fill="#00c853" opacity="0.3"/><circle cx="22" cy="10" r="2" fill="#00c853" opacity="0.3"/><path d="M4 28H28" stroke="#00c853" stroke-width="1" opacity="0.3"/></svg></div>
+            <h4>Decarbonisation Roadmaps & MACC</h4>
+            <p>Facility-level GHG inventories, sector-specific Marginal Abatement Cost Curve construction, 
+            and prioritised investment roadmaps. We help you determine whether to abate, trade, or offset — based on economics, not guesswork.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-card-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16 28C16 28 6 20 6 14C6 10 9 6 13 6C14.8 6 16 7.5 16 7.5C16 7.5 17.2 6 19 6C23 6 26 10 26 14C26 20 16 28 16 28Z" stroke="#00c853" stroke-width="0" fill="#00c853" opacity="0.08"/><path d="M16 6V28" stroke="#00c853" stroke-width="1" opacity="0.2"/><path d="M16 10C14 10 11 12 11 14" stroke="#00c853" stroke-width="1.5" stroke-linecap="round"/><path d="M16 14C18.5 14 21 16 21 18" stroke="#00c853" stroke-width="1.5" stroke-linecap="round"/><path d="M16 18C14 18 12 20 12 22" stroke="#00c853" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+            <h4>Offset Project Origination</h4>
+            <p>Development and facilitation of carbon offset projects across BEE-approved methodologies — 
+            mangrove afforestation, methane recovery, biochar from agricultural residue, and small-scale RE with storage.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-card-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="16" r="4" stroke="#00c853" stroke-width="1.5"/><circle cx="24" cy="10" r="4" stroke="#00c853" stroke-width="1.5"/><circle cx="24" cy="22" r="4" stroke="#00c853" stroke-width="1.5"/><path d="M12 14.5L20 11" stroke="#00c853" stroke-width="1" stroke-linecap="round"/><path d="M12 17.5L20 21" stroke="#00c853" stroke-width="1" stroke-linecap="round"/></svg></div>
+            <h4>Value Chain & Scope 3 Advisory</h4>
+            <p>Scope 3 screening, supplier carbon data collection frameworks, and supply chain 
+            decarbonisation strategies for Indian manufacturers supplying to European and American MNCs.</p>
+        </div>
+        <div class="service-card">
+            <div class="service-card-icon"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="20" height="20" rx="2" stroke="#00c853" stroke-width="1.5"/><path d="M6 12H26" stroke="#00c853" stroke-width="1" opacity="0.3"/><path d="M11 17H21" stroke="#00c853" stroke-width="1.5" stroke-linecap="round"/><path d="M11 21H18" stroke="#00c853" stroke-width="1.5" stroke-linecap="round"/><circle cx="8.5" cy="9" r="1" fill="#00c853" opacity="0.5"/><circle cx="11.5" cy="9" r="1" fill="#00c853" opacity="0.5"/></svg></div>
+            <h4>Carbon Accounting & MRV</h4>
+            <p>Measurement, reporting, and verification infrastructure design — the foundational 
+            data layer that makes compliance, trading, and strategic decisions possible.</p>
+        </div>
+    </div>
+
+    <!-- Analytics Strip -->
+    <div class="analytics-strip reveal">
+        <div class="analytics-strip-header">
+            <div class="section-label section-label--left"><span>Institutional-grade analytics powering every engagement</span><div class="section-label-line"></div></div>
+        </div>
+        <div class="analytics-cards">
+            <div class="analytics-card">
+                <div class="analytics-card-top">
+                    <div class="analytics-icon">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 28L11 18L17 22L28 6" stroke="#00c853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 28L11 20L17 24L28 10" stroke="#00c853" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"/>
+                            <path d="M4 28L11 22L17 26L28 14" stroke="#00c853" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.15"/>
+                        </svg>
+                    </div>
+                    <h4>Climate Scenario Analysis</h4>
+                </div>
+                <p>Modelling your carbon exposure under multiple transition pathways — orderly transition, 
+                delayed action, and net-zero alignment — so you can plan capital allocation against 
+                regulatory trajectories, not assumptions.</p>
+            </div>
+            <div class="analytics-card">
+                <div class="analytics-card-top">
+                    <div class="analytics-icon">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="20" width="5" height="8" rx="1" stroke="#00c853" stroke-width="1.5" opacity="0.4"/>
+                            <rect x="13.5" y="14" width="5" height="14" rx="1" stroke="#00c853" stroke-width="1.5" opacity="0.65"/>
+                            <rect x="23" y="6" width="5" height="22" rx="1" stroke="#00c853" stroke-width="1.5"/>
+                            <path d="M2 28H30" stroke="#00c853" stroke-width="1" opacity="0.2"/>
+                        </svg>
+                    </div>
+                    <h4>Transition Risk Quantification</h4>
+                </div>
+                <p>Translating tightening CCTS emission intensity targets into financial impact — 
+                what successive compliance cycles mean for your margins, asset valuations, 
+                and cost structures, quantified across time horizons.</p>
+            </div>
+            <div class="analytics-card">
+                <div class="analytics-card-top">
+                    <div class="analytics-icon">
+                        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="11" stroke="#00c853" stroke-width="1.5"/>
+                            <path d="M16 5V16L23 23" stroke="#00c853" stroke-width="1.5" stroke-linecap="round"/>
+                            <circle cx="16" cy="16" r="3" fill="#00c853" opacity="0.2"/>
+                        </svg>
+                    </div>
+                    <h4>Carbon Portfolio Analytics</h4>
+                </div>
+                <p>Data-driven strategy for CCC surplus management — hold vs. sell timing, 
+                portfolio balancing across nature-based and technology-based credits, and 
+                price trajectory modelling as India's carbon market develops liquidity.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SECTORS ========== -->
+<section id="sectors">
+    <div class="section-label section-label--right reveal"><span>Sector Focus</span><div class="section-label-line"></div></div>
+    <div class="section-header reveal">
+        <h2>Built for India's carbon-intensive industries</h2>
+        <p>We specialise in the sectors where CCTS compliance and CBAM exposure create the most 
+        urgent need for advisory support.</p>
+    </div>
+
+    <div class="sector-grid reveal">
+        <div class="sector-item">
+            <div class="sector-icon">🏭</div>
+            <div class="sector-info">
+                <h4>Cement</h4>
+                <p>Abatement potential up to 45 MtCO₂e at low marginal cost. CCTS-covered with massive surplus trading opportunity.</p>
+                <span class="sector-badge badge-ccts">CCTS Phase 1</span>
+            </div>
+        </div>
+        <div class="sector-item">
+            <div class="sector-icon">⛏️</div>
+            <div class="sector-info">
+                <h4>Iron & Steel</h4>
+                <p>349.5 MtCO₂e baseline emissions. Limited low-cost abatement options make strategic CCC positioning critical.</p>
+                <span class="sector-badge badge-ccts">CCTS Phase 1</span>
+            </div>
+        </div>
+        <div class="sector-item">
+            <div class="sector-icon">🧪</div>
+            <div class="sector-info">
+                <h4>Fertiliser & Chemicals</h4>
+                <p>Chlor-alkali and fertiliser plants face new intensity targets. Process emissions require specialised advisory.</p>
+                <span class="sector-badge badge-ccts">CCTS Phase 1</span>
+            </div>
+        </div>
+        <div class="sector-item">
+            <div class="sector-icon">🧵</div>
+            <div class="sector-info">
+                <h4>Textiles & Apparel</h4>
+                <p>Export-oriented sector under dual pressure: CCTS compliance domestically and CBAM-driven buyer requirements internationally.</p>
+                <span class="sector-badge badge-ccts">CCTS</span>
+                <span class="sector-badge badge-cbam" style="margin-left:0.25rem">CBAM</span>
+            </div>
+        </div>
+        <div class="sector-item">
+            <div class="sector-icon">🚗</div>
+            <div class="sector-info">
+                <h4>Auto Components</h4>
+                <p>European and American OEMs increasingly requiring carbon disclosure from Indian suppliers as a procurement condition.</p>
+                <span class="sector-badge badge-cbam">CBAM / Supply Chain</span>
+            </div>
+        </div>
+        <div class="sector-item">
+            <div class="sector-icon">🔌</div>
+            <div class="sector-info">
+                <h4>Aluminium & Metals</h4>
+                <p>75 MtCO₂e CCTS-covered emissions. Can cut ~5 MtCO₂ beyond compliance at zero cost — enabling profitable credit trading.</p>
+                <span class="sector-badge badge-ccts">CCTS Phase 1</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== APPROACH ========== -->
+<section id="approach">
+    <div class="section-label section-label--left reveal"><span>Our Approach</span><div class="section-label-line"></div></div>
+    <div class="section-header reveal" style="text-align:center;margin-left:auto;margin-right:auto;">
+        <h2>From obligation to opportunity</h2>
+    </div>
+
+    <div class="approach-steps reveal">
+        <div class="approach-step">
+            <div class="step-number">1</div>
+            <h4>Diagnose</h4>
+            <p>Baseline emissions assessment, regulatory exposure mapping, and gap analysis against 
+            BEE-notified targets. We quantify exactly where you stand.</p>
+        </div>
+        <div class="approach-step">
+            <div class="step-number">2</div>
+            <h4>Strategise</h4>
+            <p>MACC-led decarbonisation roadmap identifying whether to abate, trade, or offset — 
+            optimised for cost-effectiveness and competitive positioning.</p>
+        </div>
+        <div class="approach-step">
+            <div class="step-number">3</div>
+            <h4>Execute</h4>
+            <p>End-to-end implementation: MRV system build-out, compliance documentation, 
+            exchange advisory, and ongoing monitoring. We stay with you.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ========== INSIGHTS ========== -->
+<section id="insights">
+    <div class="section-label section-label--right reveal"><span>Insights</span><div class="section-label-line"></div></div>
+    <div class="section-header reveal">
+        <h2>Thinking ahead</h2>
+        <p>Analysis and perspectives on India's carbon markets, regulatory evolution, and industrial decarbonisation.</p>
+    </div>
+
+    <div class="insights-grid reveal">
+        <div class="insight-card">
+            <div class="insight-img"><span>📐</span></div>
+            <div class="insight-body">
+                <div class="insight-date">Coming Soon</div>
+                <h4>Why MACC Analysis Is the Most Underused Tool in Indian Industry</h4>
+                <p>How Marginal Abatement Cost Curves can transform compliance from a cost centre to a strategic investment decision.</p>
+            </div>
+        </div>
+        <div class="insight-card">
+            <div class="insight-img"><span>🇪🇺</span></div>
+            <div class="insight-body">
+                <div class="insight-date">Coming Soon</div>
+                <h4>CBAM and Indian Exports: What the First Compliance Cycle Will Reveal</h4>
+                <p>Practical lessons from the EU's transitional phase and what full enforcement means for Indian MSMEs.</p>
+            </div>
+        </div>
+        <div class="insight-card">
+            <div class="insight-img"><span>⚖️</span></div>
+            <div class="insight-body">
+                <div class="insight-date">Coming Soon</div>
+                <h4>CCTS Target-Setting: Reading Between the Lines of BEE's Final Notifications</h4>
+                <p>CEEW's MACC analysis shows most initial targets fall in the negative-cost zone. What this means for credit supply and price formation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about">
+    <div class="section-label section-label--left reveal"><span>About</span><div class="section-label-line"></div></div>
+    <div class="about-layout">
+        <div class="about-content reveal">
+            <h2>Built from finance, applied to climate</h2>
+            <p><strong>Zero Carbon</strong> is led by a former financial sector specialist whose career has 
+            spanned <strong>carbon markets, climate risk assessment, and sovereign analysis</strong>. That background 
+            shapes how we approach advisory — less compliance checklist, more economic decision-making.</p>
+            
+            <p>In practice, this means tools like <strong>Marginal Abatement Cost Curves</strong> sit at the centre 
+            of our work — helping clients determine whether to invest in abatement, purchase credits, or originate 
+            offsets based on actual cost-effectiveness rather than instinct.</p>
+
+            <p>Our leadership works closely with <strong>policymakers advancing India's carbon markets framework</strong>, 
+            which gives the firm a grounded view of where CCTS regulation is headed and how scheme design is likely 
+            to evolve. For clients, that translates into advice that accounts for what's coming — not just what's here.</p>
+
+            <p>India needs an estimated <strong>$10.1 trillion in climate investment</strong> by 2070, and a functioning 
+            carbon price is a critical piece of that architecture. We're here to help industrial firms engage with 
+            that transition — practically, and with a clear view of the economics.</p>
+        </div>
+
+        <div class="about-pillars reveal">
+            <div class="pillar">
+                <div class="pillar-icon">₹</div>
+                <div>
+                    <h4>Financial Sector Background</h4>
+                    <p>We approach carbon markets through the lens of risk pricing, portfolio strategy, and capital allocation.</p>
+                </div>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">⟡</div>
+                <div>
+                    <h4>Policy Engagement</h4>
+                    <p>Working relationships with policymakers shaping India's carbon markets, giving us a grounded view of regulatory direction.</p>
+                </div>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">↗</div>
+                <div>
+                    <h4>MACC-Led Advisory</h4>
+                    <p>Marginal Abatement Cost Curve analysis for mid-tier industrials — a service largely absent in India's current advisory landscape.</p>
+                </div>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">◎</div>
+                <div>
+                    <h4>Beyond Compliance</h4>
+                    <p>We look for the revenue, cost savings, and strategic positioning inside the carbon transition — not just the paperwork.</p>
+                </div>
+            </div>
+            <div class="pillar">
+                <div class="pillar-icon">⊕</div>
+                <div>
+                    <h4>Sector Depth</h4>
+                    <p>Deep focus on 2–3 CCTS sectors rather than surface-level coverage across all. We aim to know your industry well.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PRANGARIYA ========== -->
+<section id="prangariya" class="prangariya-section">
+    <div class="prangariya-block reveal">
+        <div class="section-label section-label--center" style="margin-bottom: 3rem;">
+            <div class="section-label-line"></div>
+            <span>Prāngārīya</span>
+            <div class="section-label-line"></div>
+        </div>
+        <div class="prangariya-top">
+            <div class="prangariya-tree">
+                <svg viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                  <g transform="translate(0.000000,250.000000) scale(0.100000,-0.100000)" fill="#00c853" opacity="0.18">
+                    <path d="M1270 2393 c-19 -9 -45 -15 -57 -14 -14 2 -23 -3 -23 -11 0 -9 -18
+                -13 -65 -13 -48 0 -64 -3 -61 -12 3 -7 1 -15 -4 -18 -6 -4 -10 1 -10 11 0 13
+                -6 15 -27 10 -40 -10 -45 -10 -81 -2 -18 4 -32 4 -31 -1 4 -24 -14 -50 -32
+                -46 -32 9 -70 -6 -67 -25 2 -13 -3 -16 -22 -14 -13 1 -31 0 -40 -4 -8 -3 -30
+                -7 -49 -9 -18 -1 -38 -9 -43 -18 -4 -9 -15 -14 -23 -10 -21 8 -45 -15 -45 -44
+                0 -13 -6 -26 -14 -29 -20 -8 -28 -34 -16 -49 7 -8 5 -12 -8 -12 -9 0 -21 5
+                -25 11 -6 8 -10 8 -13 0 -3 -6 -18 -10 -33 -8 -31 4 -49 -24 -28 -45 8 -8 1
+                -19 -23 -40 -22 -18 -39 -26 -45 -20 -14 14 -28 11 -21 -6 3 -8 0 -14 -7 -12
+                -7 1 -12 -6 -12 -15 0 -26 -13 -32 -37 -16 -62 40 -158 -4 -108 -50 22 -21 23
+                -23 5 -19 -11 2 -26 -2 -33 -10 -11 -11 -9 -13 9 -13 20 0 18 -4 -16 -37 -24
+                -23 -40 -33 -43 -25 -2 7 -8 9 -13 6 -6 -3 1 -16 15 -29 14 -13 22 -26 19 -29
+                -10 -10 17 -7 38 5 20 10 20 10 4 -15 -11 -16 -13 -26 -6 -26 6 0 11 -5 11
+                -11 0 -5 -4 -8 -9 -5 -5 3 -8 -2 -7 -11 0 -10 -6 -18 -14 -18 -22 0 -60 -24
+                -60 -37 0 -7 4 -7 13 0 9 8 12 2 12 -26 0 -24 4 -36 13 -35 6 2 12 -6 12 -18
+                0 -11 4 -17 10 -14 5 3 10 0 10 -8 0 -8 -10 -17 -23 -21 -40 -10 -92 -63 -78
+                -80 9 -10 9 -16 1 -21 -6 -4 -9 -14 -5 -22 3 -9 -2 -27 -11 -41 -16 -25 -16
+                -25 11 -18 24 6 27 4 23 -12 -4 -12 2 -24 15 -32 20 -12 20 -13 -8 -28 -26
+                -13 -27 -16 -12 -27 12 -9 14 -14 5 -23 -11 -11 5 -17 33 -14 4 1 4 -9 1 -21
+                -5 -22 -5 -22 17 -2 18 16 24 17 31 5 7 -11 14 -12 34 -2 29 13 32 6 11 -22
+                -34 -44 45 -74 82 -32 23 27 46 15 28 -14 -3 -5 -1 -10 6 -10 7 0 5 -8 -6 -20
+                -10 -11 -16 -22 -13 -25 3 -3 11 1 17 9 15 18 41 10 41 -11 0 -11 7 -14 27
+                -10 15 3 36 1 45 -4 12 -6 18 -6 18 1 0 5 6 10 13 10 7 0 22 8 33 18 36 34
+                109 36 131 4 17 -26 19 -31 22 -59 1 -14 41 -13 41 0 0 8 14 -8 47 -52 7 -9
+                33 24 29 36 -4 10 -1 11 14 3 24 -13 28 -13 33 3 2 6 3 4 2 -5 -2 -10 3 -22
+                11 -29 11 -9 14 -6 14 15 0 47 17 18 18 -30 2 -61 12 -71 12 -12 0 38 -28 124
+                -31 93 0 -5 -4 0 -9 12 -5 12 -7 31 -5 41 2 11 -2 19 -11 19 -9 0 -14 -12 -14
+                -34 0 -19 -5 -33 -12 -34 -7 0 -26 -2 -43 -3 -35 -3 -45 8 -45 49 0 21 -3 26
+                -11 18 -15 -15 -70 23 -62 43 3 8 0 14 -6 14 -6 0 -10 -3 -10 -7 3 -19 -2 -33
+                -12 -33 -7 0 -9 9 -5 24 7 27 -35 43 -57 22 -7 -6 -24 -12 -39 -12 -42 -3 -67
+                -31 -33 -40 14 -3 25 -10 25 -15 0 -5 -7 -6 -15 -3 -8 4 -15 1 -15 -6 0 -7 -7
+                -10 -16 -6 -9 4 -22 2 -29 -4 -10 -8 -15 -8 -20 1 -4 6 -1 15 6 20 12 7 12 9
+                0 9 -8 0 -12 3 -9 6 4 3 16 0 28 -6 20 -10 21 -10 12 6 -7 13 -5 23 9 38 11
+                11 17 26 14 34 -3 8 0 10 6 6 11 -6 29 12 29 30 0 5 -15 6 -34 3 -19 -3 -37
+                -3 -40 0 -12 12 25 33 57 33 29 0 37 5 44 25 6 19 11 22 23 14 11 -8 12 -12 3
+                -16 -21 -8 -15 -33 7 -33 11 0 20 7 20 15 0 9 6 12 15 9 8 -4 13 -9 11 -13 -8
+                -12 68 -5 93 8 21 12 26 10 47 -15 18 -23 23 -25 24 -11 0 20 11 22 28 5 9 -9
+                12 -9 12 -1 0 8 12 10 35 6 34 -5 35 -5 35 28 1 34 1 34 21 10 13 -16 16 -27
+                9 -31 -15 -9 80 -82 98 -75 7 3 22 0 33 -5 24 -13 26 4 4 26 -8 9 -15 13 -15
+                9 0 -7 -48 23 -77 48 -12 11 -20 24 -17 29 3 5 0 7 -7 6 -7 -2 -13 6 -14 17 0
+                21 16 45 26 39 4 -2 9 3 13 11 3 8 1 17 -5 20 -5 4 -6 11 -3 17 4 6 9 7 13 1
+                3 -6 14 -2 25 8 18 17 18 19 1 25 -9 4 -20 3 -24 -2 -16 -23 -45 -40 -39 -22
+                4 10 1 19 -8 22 -8 3 -14 14 -14 25 0 27 -13 33 -36 16 -16 -12 -17 -14 -3
+                -15 9 0 19 -7 22 -15 5 -11 1 -12 -20 -4 -14 5 -34 7 -44 4 -11 -4 -21 1 -27
+                12 -7 12 -25 18 -59 20 -44 2 -102 8 -112 12 -9 3 23 31 33 29 21 -4 67 13 61
+                22 -3 6 -2 10 3 10 5 0 12 -9 15 -20 3 -11 0 -20 -6 -20 -8 0 -7 -4 2 -9 7 -5
+                21 -7 30 -6 9 2 20 4 24 4 5 1 5 10 2 21 -4 12 -2 20 5 20 6 0 8 -6 5 -12 -4
+                -7 0 -5 8 4 8 10 17 15 20 11 4 -3 16 2 27 12 21 19 21 19 6 -11 -10 -18 -12
+                -30 -5 -32 6 -3 6 -9 -2 -18 -10 -12 -8 -13 12 -6 24 9 39 32 20 32 -6 0 -11
+                5 -11 12 0 7 6 6 18 -4 28 -25 52 -29 59 -12 8 21 23 -1 23 -33 0 -15 6 -23
+                17 -23 9 0 14 -3 10 -6 -3 -4 0 -13 8 -20 7 -8 16 -19 18 -26 4 -10 8 -10 15
+                1 13 18 35 4 27 -17 -3 -9 -3 -13 1 -9 4 4 13 -1 20 -11 7 -9 17 -18 23 -18 6
+                -1 12 -2 14 -4 15 -12 37 -5 37 11 0 19 2 19 22 5 17 -12 25 -13 42 -3 20 11
+                26 13 45 16 5 0 9 12 9 26 0 14 -4 25 -9 25 -5 0 -9 7 -9 15 0 18 5 18 31 5
+                13 -7 19 -7 19 -1 0 7 9 7 27 0 33 -12 53 7 48 47 -2 18 2 24 12 20 32 -13 69
+                45 42 65 -44 34 -49 40 -49 54 0 17 16 20 25 5 3 -5 17 -10 31 -10 24 0 29
+                -11 25 -57 -1 -12 3 -24 9 -28 6 -3 7 -11 4 -17 -5 -8 -1 -9 10 -5 18 7 50
+                -15 39 -27 -4 -3 1 -6 10 -6 25 0 32 22 12 37 -17 12 -17 13 -2 13 9 0 17 -4
+                17 -10 0 -5 7 -10 16 -10 11 0 14 -5 10 -17 -4 -9 -1 -20 5 -24 29 -17 -48
+                -64 -89 -54 -17 4 -22 9 -14 14 7 4 10 15 6 25 -8 21 -36 1 -32 -23 1 -9 -1
+                -21 -5 -28 -5 -7 0 -9 14 -6 18 5 20 3 14 -16 -7 -23 11 -55 26 -45 15 9 10
+                -13 -5 -25 -13 -11 -12 -15 6 -33 20 -20 22 -20 35 -3 12 18 13 18 13 -4 0
+                -13 4 -19 10 -16 6 4 9 12 8 18 -4 19 23 77 36 77 17 0 36 -21 36 -39 0 -11
+                -4 -10 -15 5 -9 12 -14 14 -15 6 0 -7 -4 -11 -9 -7 -13 8 -29 -24 -24 -46 3
+                -11 12 -19 19 -19 8 0 13 -5 11 -12 -1 -6 6 -14 16 -16 22 -4 22 16 0 40 -9
+                11 -11 18 -5 18 7 0 12 -5 12 -11 0 -6 6 -9 14 -6 18 7 36 -11 29 -32 -3 -12
+                -2 -12 7 2 6 10 9 25 6 33 -4 10 -1 14 6 11 7 -2 22 0 33 6 11 5 17 6 13 2 -4
+                -5 -3 -14 3 -22 13 -15 33 -18 24 -3 -3 6 1 10 9 10 9 0 16 -6 16 -12 0 -7 11
+                0 23 16 13 16 29 26 34 23 6 -4 14 -1 17 5 3 7 3 1 0 -13 -3 -15 -1 -30 5 -34
+                6 -3 9 -11 6 -16 -9 -13 9 -11 22 2 7 7 19 8 30 4 10 -4 29 -8 43 -9 19 -1 24
+                -6 22 -20 -3 -14 1 -17 12 -13 9 4 16 2 16 -3 0 -6 7 -10 15 -10 21 0 19 -13
+                -5 -27 -20 -13 -42 0 -52 29 -4 10 -8 10 -21 -1 -10 -7 -17 -10 -17 -6 0 5 -9
+                0 -20 -10 -10 -9 -19 -25 -18 -34 3 -42 -3 -76 -11 -62 -6 9 -11 10 -15 2 -4
+                -6 -5 -15 -1 -20 3 -5 1 -12 -4 -15 -5 -4 -12 -2 -16 3 -9 16 -37 0 -30 -16 4
+                -11 1 -13 -11 -9 -12 5 -15 2 -10 -10 3 -8 6 -28 6 -42 1 -25 2 -25 14 -9 7 9
+                20 17 29 17 9 0 18 4 21 9 10 15 66 32 60 17 -2 -6 14 -23 36 -36 28 -17 39
+                -30 36 -42 -5 -22 10 -24 18 -2 13 35 7 68 -10 53 -16 -13 -17 12 -3 71 3 9
+                -3 14 -13 14 -10 -1 -15 2 -12 7 3 5 11 9 19 9 7 0 17 10 22 23 5 15 10 -12
+                13 -82 3 -64 9 -106 16 -108 18 -6 23 31 9 69 -6 19 -8 43 -5 54 7 18 8 17 14
+                -4 9 -27 21 -20 21 11 0 28 25 34 32 8 6 -22 23 -23 68 -7 36 14 42 15 51 6 5
+                -5 15 -5 24 0 12 7 12 12 2 22 -17 17 -15 48 2 48 8 0 21 9 29 20 8 11 16 17
+                20 14 11 -11 46 16 41 31 -4 9 0 15 10 15 20 0 21 26 1 34 -18 6 -4 53 21 72
+                26 21 3 70 -36 78 -18 4 -30 21 -30 41 0 18 4 23 16 18 10 -4 17 1 21 15 3 12
+                14 24 24 27 26 8 24 21 -3 29 -23 6 -23 6 2 22 14 10 27 19 29 20 2 2 -1 10
+                -7 17 -7 8 -9 17 -6 20 12 12 -24 54 -63 75 -21 11 -37 25 -36 31 2 6 -4 11
+                -12 11 -8 0 -15 6 -15 13 0 7 -9 23 -20 35 -12 12 -16 22 -10 22 5 0 10 7 10
+                15 0 9 -6 15 -12 14 -7 -1 -23 2 -35 7 -20 8 -23 12 -23 29 0 3 -11 -2 -25
+                -11 -24 -16 -25 -16 -25 9 0 16 8 31 20 37 11 6 18 16 14 22 -4 5 0 15 7 20
+                11 7 11 11 2 15 -9 3 -9 10 3 28 17 27 2 56 -24 47 -12 -4 -16 8 -12 42 1 11
+                -3 15 -9 12 -6 -4 -11 0 -11 9 0 9 -5 13 -11 10 -22 -14 -60 -13 -55 1 4 10
+                -3 14 -20 14 -21 0 -24 4 -19 20 4 13 2 20 -7 20 -10 0 -11 2 0 8 21 14 4 44
+                -18 32 -27 -15 -56 -12 -75 6 -11 11 -25 14 -47 10 -41 -8 -109 13 -131 41
+                -10 13 -24 23 -32 23 -7 0 -15 7 -19 15 -3 8 -16 15 -28 15 -38 0 -68 12 -68
+                26 0 8 -6 11 -15 8 -8 -4 -15 -1 -15 6 0 6 -4 9 -9 5 -5 -3 -12 -1 -16 4 -3 6
+                -12 8 -20 5 -7 -3 -23 -1 -34 6 -12 6 -21 7 -21 2 0 -20 -88 11 -99 34 -10 24
+                -41 34 -41 14 0 -18 -18 -11 -25 10 -8 24 -10 24 -55 3z m-125 -223 c-3 -5 7
+                -5 23 -1 35 10 43 -22 11 -40 -28 -14 -37 -3 -13 16 16 13 16 14 1 9 -9 -3
+                -23 -1 -31 5 -10 9 -15 8 -19 -3 -6 -15 -43 -11 -53 6 -4 6 2 7 15 3 25 -8 54
+                11 44 29 -4 6 1 5 10 -3 9 -7 14 -17 12 -21z m273 -14 c2 -3 1 -10 -3 -16 -5
+                -9 -10 -9 -18 -1 -6 6 -19 11 -29 11 -10 0 -18 5 -18 11 0 11 56 6 68 -5z m62
+                -31 c0 -3 -9 -5 -20 -5 -15 0 -20 7 -20 25 0 25 0 25 20 5 11 -11 20 -22 20
+                -25z m-112 -10 c15 -14 35 -25 45 -25 10 0 29 -7 43 -16 13 -9 27 -14 31 -10
+                3 3 1 6 -5 6 -7 0 -12 8 -12 17 0 15 2 14 15 -3 20 -27 19 -34 -10 -34 -14 0
+                -25 5 -25 11 0 15 -45 7 -46 -8 -4 -36 -5 -37 -18 -20 -7 9 -18 17 -25 17 -6
+                0 -11 5 -11 11 0 5 5 7 10 4 6 -4 5 4 -1 19 -7 14 -16 23 -22 19 -5 -3 -4 -9
+                3 -13 9 -6 8 -14 -5 -34 -19 -28 -45 -35 -45 -11 0 27 -1 30 -17 48 -9 9 -14
+                20 -11 23 4 3 14 -8 24 -25 10 -17 22 -31 26 -31 12 0 10 10 -7 26 -24 24 -12
+                44 33 53 2 1 15 -10 30 -24z m-331 -23 c2 -17 -3 -23 -25 -27 -15 -4 -35 -10
+                -44 -15 -28 -15 -52 -2 -35 19 8 9 17 24 21 35 4 11 12 16 21 12 8 -3 15 -1
+                15 4 0 19 43 -7 47 -28z m165 -92 c-4 -12 -2 -13 9 -2 7 6 17 12 23 12 5 0 -1
+                -9 -14 -20 -24 -21 -60 -27 -60 -10 0 13 -33 13 -64 -1 -20 -9 -23 -16 -16
+                -29 7 -14 4 -21 -13 -33 -38 -25 -67 -30 -67 -13 0 9 -7 16 -15 16 -9 0 -12
+                -6 -9 -15 4 -10 0 -15 -15 -15 -12 0 -21 -4 -21 -8 0 -16 13 -21 30 -12 13 7
+                21 5 30 -5 10 -12 3 -13 -40 -9 -40 4 -51 2 -47 -8 3 -8 -5 -14 -20 -14 -14
+                -1 -31 -11 -38 -21 -8 -11 -32 -25 -55 -33 -23 -8 -39 -19 -36 -25 7 -18 -25
+                -14 -37 6 -10 16 -12 15 -28 -5 -9 -11 -14 -25 -9 -31 17 -21 15 -51 -4 -68
+                -24 -21 -6 -41 29 -31 20 6 20 6 0 -9 -14 -11 -24 -12 -32 -5 -8 6 -18 6 -30
+                -2 -15 -9 -14 -10 7 -4 22 6 23 5 11 -9 -7 -9 -17 -14 -22 -11 -5 3 -9 -1 -10
+                -8 0 -10 -2 -10 -6 0 -7 17 -33 15 -33 -3 0 -8 -7 -15 -16 -15 -8 0 -12 5 -9
+                10 4 7 -10 9 -41 7 -30 -3 -50 -10 -56 -21 -11 -19 -40 -22 -32 -2 4 10 -2 12
+                -20 9 -16 -3 -26 -1 -26 6 0 7 6 11 13 10 24 -3 37 1 37 12 0 5 -5 7 -10 4
+                -14 -9 -40 13 -40 34 0 13 2 13 9 2 5 -7 26 -15 47 -17 20 -2 40 -7 43 -12 7
+                -10 41 -12 41 -3 0 4 -9 12 -20 19 -11 7 -17 18 -14 27 4 10 0 15 -10 15 -9 0
+                -16 5 -16 10 0 6 -7 10 -16 10 -19 0 -14 22 7 28 11 3 11 1 -1 -8 -13 -9 -12
+                -10 5 -8 11 1 26 -1 34 -6 8 -5 17 -3 23 5 7 10 8 8 5 -9 -4 -18 -3 -21 7 -13
+                7 6 17 7 21 3 5 -4 5 -2 1 5 -3 6 -2 14 4 18 5 3 10 1 10 -6 0 -8 4 -8 15 1
+                10 9 15 9 15 1 0 -6 7 -11 15 -11 25 0 17 30 -11 40 -31 12 -37 12 -30 2 2 -4
+                -5 -9 -17 -10 -12 -1 -31 -3 -41 -5 -10 -1 -21 4 -23 11 -3 7 -1 11 4 10 8 -3
+                13 5 13 22 0 6 -3 9 -8 8 -7 -3 -12 5 -12 21 0 5 14 12 30 16 31 7 39 19 18
+                29 -7 3 -4 4 7 1 11 -2 27 0 35 6 11 7 2 9 -32 7 -27 -2 -48 -1 -48 2 1 12 28
+                40 40 40 7 0 10 7 6 15 -8 21 32 35 62 22 31 -14 22 -33 -15 -29 -19 2 -35 -3
+                -44 -14 -12 -16 -12 -17 3 -11 9 3 18 1 21 -6 2 -7 14 -3 34 11 17 12 32 20
+                34 18 2 -3 5 7 5 20 2 19 -3 24 -21 24 -45 0 -40 31 8 49 18 7 27 7 27 1 0 -6
+                11 -8 24 -4 34 8 38 -23 8 -63 -13 -18 -21 -33 -17 -33 3 0 -8 -12 -25 -26
+                -17 -15 -29 -29 -26 -32 3 -2 1 -12 -4 -21 -6 -13 -4 -17 12 -18 13 -1 18 3
+                14 13 -3 8 -1 14 4 14 6 0 10 -7 10 -16 0 -13 3 -14 14 -5 8 7 29 10 45 8 17
+                -3 31 -1 31 4 0 5 -7 9 -16 9 -13 0 -14 3 -5 14 9 11 9 16 0 22 -7 4 -9 3 -6
+                -3 3 -5 0 -10 -8 -10 -8 0 -15 4 -15 9 0 4 5 8 11 8 5 0 7 5 3 12 -4 7 -3 8 4
+                4 15 -9 74 22 69 37 -2 7 -11 11 -20 9 -8 -1 -18 2 -22 7 -6 11 29 34 39 24 3
+                -3 6 -1 6 5 0 7 14 12 33 12 24 0 28 -3 17 -10 -12 -8 -10 -10 10 -11 89 -5
+                126 -4 132 5 5 7 8 6 8 -3 0 -11 3 -11 15 -1 21 17 19 27 -6 35 -13 5 -18 10
+                -11 17 12 12 61 14 86 3 10 -4 21 -4 25 1 27 39 106 42 93 4z m-643 -24 c-14
+                -13 -50 16 -39 29 11 14 15 13 27 -5 8 -12 13 -23 12 -24z m1006 3 c-4 -6 1
+                -17 11 -24 11 -9 14 -14 7 -15 -7 0 -12 -3 -12 -7 4 -26 -2 -34 -23 -28 -16 6
+                -20 4 -15 -8 3 -10 -1 -17 -14 -20 -10 -3 -19 -2 -19 2 0 5 -11 20 -24 34 -14
+                15 -20 29 -15 32 5 4 9 1 9 -5 0 -6 5 -8 13 -3 6 4 20 6 30 4 16 -2 17 0 7 19
+                -8 15 -8 20 -1 16 6 -4 19 -2 28 3 23 13 26 13 18 0z m-115 -18 c0 -16 -25
+                -19 -55 -6 -30 13 -30 13 13 14 23 1 42 -3 42 -8z m-91 -70 c3 -1 -4 -8 -15
+                -17 -12 -10 -15 -17 -8 -20 7 -3 10 -14 7 -25 -4 -15 -2 -18 11 -13 9 4 16 3
+                15 -2 -6 -35 10 -44 35 -18 9 8 16 12 17 7 0 -4 2 -16 4 -25 2 -10 -1 -18 -6
+                -18 -4 0 -13 -9 -19 -19 -9 -19 -9 -19 21 -4 23 11 36 13 52 5 18 -9 19 -11 5
+                -11 -10 -1 -18 -6 -18 -12 0 -8 12 -10 34 -6 18 3 38 1 44 -5 8 -8 16 -6 27 6
+                17 17 40 22 31 7 -7 -11 14 -20 32 -13 6 2 12 8 12 14 0 5 -6 6 -12 2 -7 -4
+                -10 -3 -5 1 15 17 48 13 41 -4 -11 -28 -9 -46 5 -43 8 2 11 -3 8 -13 -4 -9 -1
+                -15 8 -15 8 0 15 6 15 13 0 9 3 8 9 -2 5 -7 14 -10 20 -7 6 4 11 1 11 -7 0 -8
+                8 -21 17 -28 14 -12 16 -12 11 2 -4 9 -1 16 7 16 8 0 13 -5 12 -10 -1 -5 4
+                -12 11 -14 6 -3 12 1 12 8 0 7 6 5 15 -7 13 -16 16 -17 25 -4 13 19 31 -4 22
+                -29 -9 -26 -32 -57 -32 -43 0 6 -6 12 -13 12 -7 0 -18 9 -25 21 -10 15 -21 20
+                -38 16 -20 -3 -24 0 -24 18 0 17 -6 23 -22 24 -13 0 -44 1 -70 2 -27 1 -54 -3
+                -63 -11 -12 -10 -19 -10 -27 -2 -15 15 -62 16 -53 2 4 -7 -3 -8 -21 -4 -38 10
+                -75 30 -68 37 3 3 -16 4 -42 2 -27 -1 -41 -1 -32 2 35 9 -3 31 -40 22 -48 -10
+                -65 -29 -27 -29 29 0 29 0 7 -16 -20 -14 -24 -14 -38 0 -11 11 -28 14 -60 11
+                -24 -2 -44 -1 -44 4 0 13 -65 41 -97 41 -15 0 -23 4 -18 8 6 4 15 21 21 37 7
+                21 15 29 28 27 13 -3 17 1 13 11 -8 22 3 28 26 16 14 -8 22 -8 27 1 5 9 9 9
+                14 1 10 -15 29 -14 20 2 -5 9 -4 9 7 -1 7 -6 13 -24 14 -40 0 -15 6 -27 13
+                -27 7 0 16 -5 20 -11 4 -6 22 -11 40 -12 33 -1 33 -1 10 18 -19 16 -20 21 -9
+                29 7 5 11 13 7 19 -3 6 -1 14 5 18 8 4 9 3 5 -4 -5 -8 -2 -10 8 -6 14 5 14 9
+                0 30 -13 19 -20 22 -35 13 -14 -7 -19 -6 -19 3 0 14 20 48 20 35 0 -5 5 -5 11
+                -1 8 4 7 9 -2 15 -28 18 30 30 90 20z m-889 -46 c-7 -8 -18 -15 -24 -15 -7 0
+                -12 -9 -13 -20 -1 -11 4 -20 13 -20 8 0 14 -4 14 -9 0 -14 -42 -21 -62 -10
+                -10 5 -24 7 -30 3 -7 -5 -9 -2 -5 8 4 12 1 14 -14 11 -10 -3 -19 -9 -19 -13 0
+                -9 -80 -33 -88 -26 -3 3 1 6 9 6 23 0 54 41 38 50 -8 6 0 13 25 24 43 18 67
+                12 39 -10 -10 -7 -13 -14 -6 -14 17 0 63 22 63 31 0 13 33 20 41 7 6 -9 10 -8
+                15 5 3 10 9 16 12 13 3 -3 -1 -12 -8 -21z m588 -10 c-16 -13 -28 -33 -28 -45
+                0 -11 -4 -20 -9 -20 -5 0 -16 -3 -25 -6 -11 -4 -16 -1 -16 11 0 14 -6 16 -39
+                10 -24 -4 -42 -2 -46 4 -7 12 0 13 62 13 24 -1 42 2 40 6 -4 14 39 48 63 50
+                25 1 25 1 -2 -23z m691 -27 c11 -3 10 -7 -3 -21 -10 -9 -15 -21 -12 -26 3 -5
+                0 -14 -8 -20 -11 -9 -15 -8 -20 5 -4 10 -3 20 1 23 14 10 15 42 1 59 -12 16
+                -11 16 7 1 11 -9 26 -18 34 -21z m-119 11 c0 -6 8 -8 18 -5 12 4 11 1 -5 -13
+                -14 -11 -31 -17 -43 -14 -21 6 -22 30 -1 26 6 -2 11 2 11 7 0 6 5 10 10 10 6
+                0 10 -5 10 -11z m-112 -26 c-15 -15 -15 -18 -2 -28 13 -9 10 -11 -15 -13 -21
+                -2 -31 2 -31 12 0 30 13 46 38 46 25 0 25 -1 10 -17z m-1118 -53 c0 -11 -3
+                -20 -7 -21 -5 0 -24 -2 -43 -4 -46 -3 -47 -4 -30 -15 18 -11 11 -19 -22 -22
+                -16 -1 -24 -7 -21 -14 3 -8 18 -11 41 -8 37 4 37 4 2 -10 -19 -7 -34 -19 -32
+                -25 1 -6 -1 -10 -5 -10 -25 4 -53 -2 -48 -11 3 -5 -1 -10 -9 -10 -9 0 -15 -5
+                -13 -11 1 -6 -3 -13 -8 -15 -6 -2 -12 7 -13 21 -1 16 3 25 13 25 8 0 15 6 15
+                14 0 8 7 17 16 20 10 4 13 13 9 25 -5 16 2 23 32 37 21 10 47 26 57 36 27 25
+                66 24 66 -2z m1364 -36 c15 -11 11 -12 -30 -9 -71 5 -70 4 -54 15 20 12 60 9
+                84 -6z m-452 -87 c7 -8 20 -12 28 -10 9 3 22 -2 29 -10 10 -13 8 -15 -16 -11
+                -15 3 -36 6 -45 7 -9 1 -19 9 -21 19 -6 21 7 24 25 5z m-944 -24 c-2 -12 2
+                -17 12 -15 8 2 12 1 8 -3 -4 -4 -1 -14 7 -22 23 -23 18 -43 -11 -43 -17 0 -24
+                4 -21 13 6 15 -60 11 -80 -5 -7 -5 -17 -7 -23 -3 -19 12 21 47 47 42 12 -2 21
+                -1 20 3 -2 7 32 48 41 49 2 1 2 -7 0 -16z m1292 -12 c13 -24 -2 -36 -27 -22
+                -17 10 -17 10 0 11 20 0 23 16 5 23 -10 4 -10 6 -1 6 7 1 17 -8 23 -18z m-840
+                -26 c-13 -16 -45 -21 -36 -6 4 5 0 12 -6 15 -7 3 -3 3 9 1 12 -3 24 -1 28 5 4
+                6 9 9 12 6 3 -3 0 -12 -7 -21z m570 -6 c0 -5 6 -7 13 -3 6 4 8 3 4 -2 -4 -4
+                -24 -9 -44 -10 -34 -1 -34 0 -12 12 29 16 39 17 39 3z m753 3 c-17 -11 1 -36
+                21 -29 10 4 16 2 15 -6 -3 -27 2 -38 17 -35 10 2 19 -3 21 -9 3 -8 -4 -13 -16
+                -13 -12 0 -21 5 -21 10 0 14 -38 12 -42 -2 -3 -7 -7 -6 -11 5 -3 9 -2 17 3 17
+                6 0 10 7 10 15 0 8 -6 15 -13 15 -7 0 -13 9 -13 20 0 14 7 20 21 20 13 0 16
+                -3 8 -8z m-818 -46 c23 -19 27 -27 18 -36 -8 -9 -14 -7 -22 8 -6 11 -18 28
+                -27 36 -24 25 -2 19 31 -8z m575 -26 c-9 -6 -6 -10 10 -15 22 -7 22 -7 -1 -31
+                -27 -29 -44 -32 -29 -5 7 13 7 28 0 46 -14 36 -13 37 11 24 16 -8 18 -13 9
+                -19z m-174 -25 c-4 -13 -2 -13 14 -5 15 8 21 6 30 -10 8 -15 8 -20 -1 -20 -7
+                0 -10 -3 -6 -6 3 -3 -4 -17 -16 -30 -22 -25 -55 -13 -45 16 3 9 9 8 21 -4 9
+                -10 17 -13 17 -7 0 15 -30 41 -48 42 -12 0 -11 3 6 9 12 5 22 14 22 20 0 5 3
+                10 6 10 3 0 4 -7 0 -15z m120 -13 c2 -9 5 -29 8 -44 4 -28 -19 -43 -44 -28
+                -14 8 -4 50 11 50 5 0 9 6 8 13 -5 39 11 48 17 9z m-1417 -6 c-3 -24 2 -37 21
+                -56 20 -20 20 -20 -10 -42 -27 -20 -28 -23 -14 -39 13 -15 13 -17 -1 -23 -9
+                -3 -13 -2 -10 4 3 6 -3 10 -14 10 -25 0 -28 -15 -5 -24 14 -5 14 -9 3 -23 -11
+                -13 -11 -17 -2 -20 9 -3 10 -10 4 -22 -6 -11 -6 -22 0 -32 8 -11 12 -11 16 -1
+                2 6 10 12 16 12 6 0 0 -11 -13 -25 -25 -26 -40 -25 -36 2 2 10 -8 23 -22 30
+                -29 15 -56 17 -47 3 4 -6 -1 -7 -11 -3 -13 5 -16 3 -11 -10 4 -11 2 -14 -8
+                -11 -10 4 -11 13 -5 35 8 28 -2 40 -15 19 -6 -10 -58 -9 -53 1 4 8 -37 49 -50
+                49 -11 0 -13 9 -7 37 6 33 5 35 -9 24 -14 -12 -14 -10 0 18 9 17 20 31 25 31
+                6 0 8 -4 5 -8 -3 -5 4 -15 15 -22 10 -8 19 -22 19 -32 0 -12 8 -18 21 -18 15
+                0 19 -5 15 -15 -3 -8 -4 -15 -2 -15 3 0 12 -3 22 -7 11 -4 15 -3 10 5 -3 6 -2
+                13 4 17 5 3 10 1 10 -6 0 -8 6 -7 18 3 9 9 26 18 37 21 14 3 10 5 -12 7 -48 4
+                -51 4 -60 14 -5 5 -3 6 5 2 6 -4 12 -2 12 3 0 6 -11 11 -24 11 -24 0 -43 16
+                -33 26 3 3 23 5 46 6 37 0 46 7 42 31 -1 4 8 2 19 -5 11 -7 20 -16 20 -21 0
+                -4 5 -5 10 -2 6 4 4 12 -5 21 -19 20 -19 38 0 30 9 -3 20 2 27 13 12 20 39 17
+                37 -3z m678 -17 c1 -19 -1 -26 -4 -16 -3 11 -11 16 -19 13 -12 -5 -13 3 -5 42
+                4 19 26 -13 28 -39z m528 11 c-3 -5 3 -17 14 -27 15 -13 17 -19 8 -25 -8 -5
+                -5 -8 9 -8 27 0 52 -26 32 -32 -7 -3 -23 1 -34 9 -34 22 -79 32 -97 21 -10 -5
+                -17 -7 -17 -4 0 16 63 37 72 24 5 -9 7 -4 4 14 -2 14 -2 29 1 32 10 9 15 7 8
+                -4z m-1055 -24 c0 -2 3 -11 6 -20 5 -12 0 -16 -22 -15 -17 1 -22 3 -11 6 9 2
+                17 9 17 14 0 6 -9 7 -21 4 -15 -5 -19 -4 -15 4 7 10 46 16 46 7z m60 -6 c0 -5
+                -4 -10 -10 -10 -5 0 -6 -7 -3 -17 4 -11 3 -14 -5 -9 -7 4 -12 1 -12 -7 0 -8
+                10 -19 23 -26 21 -11 21 -11 1 -8 -12 3 -29 0 -38 -5 -11 -6 -21 -4 -32 6 -8
+                9 -13 17 -10 17 3 1 10 2 14 3 12 2 43 34 41 43 -3 17 1 23 16 23 8 0 15 -4
+                15 -10z m1230 -56 c0 -10 5 -14 16 -10 9 3 12 2 9 -5 -4 -5 -2 -16 5 -24 9
+                -11 6 -12 -17 -6 -28 7 -49 61 -24 61 6 0 11 -7 11 -16z m-975 -4 c3 -5 1 -18
+                -4 -27 -10 -17 -10 -17 -11 0 0 9 -7 17 -16 17 -11 0 -14 -5 -9 -17 5 -15 4
+                -16 -7 -5 -11 11 -10 16 6 28 23 17 33 18 41 4z m-151 -21 c5 7 13 8 25 1 10
+                -5 21 -6 25 -3 3 3 6 1 6 -6 0 -9 -8 -11 -25 -7 -20 5 -23 3 -18 -11 5 -14 2
+                -13 -16 4 -27 25 -51 20 -51 -11 0 -14 -6 -23 -15 -23 -8 0 -15 4 -15 9 0 4 5
+                8 11 8 5 0 7 5 3 11 -12 20 38 51 52 32 8 -12 13 -13 18 -4z m1216 3 c0 -5 14
+                -8 31 -7 27 2 30 -1 26 -21 -3 -15 0 -21 10 -17 7 3 13 0 13 -6 0 -7 9 -15 21
+                -19 19 -7 19 -9 5 -21 -14 -11 -16 -11 -16 3 0 10 -4 15 -9 12 -16 -11 -39 5
+                -46 31 -3 15 -11 23 -19 20 -14 -5 -36 10 -36 25 0 4 5 8 10 8 6 0 10 -4 10
+                -8z m203 -160 c-8 -31 -45 -49 -41 -20 2 13 8 23 15 23 6 0 15 3 19 8 11 11
+                13 9 7 -11z M825 1907 c-28 -36 -35 -57 -20 -57 8 0 15 7 15 15 0 9 6 12 18 9
+                12 -4 13 -3 4 3 -7 5 -10 17 -6 26 7 20 3 21 -11 4z M553 1763 c-25 -9 -14
+                -30 12 -25 14 2 25 8 25 12 0 11 -22 18 -37 13z M1565 1698 c-11 -6 -21 -12
+                -23 -13 -1 -1 2 -15 8 -31 10 -26 13 -27 21 -11 6 9 7 22 3 29 -4 6 -3 8 4 4
+                13 -8 27 13 16 24 -5 5 -18 4 -29 -2z M1440 1482 c-30 -10 -35 -42 -6 -42 8 0
+                16 10 19 22 7 26 7 27 -13 20z M927 1443 c-11 -10 -8 -25 3 -18 6 3 10 1 10
+                -4 0 -6 5 -11 10 -11 6 0 10 9 10 20 0 19 -20 27 -33 13z M1401 1421 c-14 -9
+                -25 -61 -13 -61 5 0 15 7 22 15 7 8 21 15 32 15 28 0 19 33 -9 35 -12 1 -27
+                -1 -32 -4z M1404 1356 c-3 -9 -9 -14 -14 -11 -4 2 -12 -7 -18 -20 -14 -29 0
+                -41 22 -19 15 14 16 14 16 0 0 -9 5 -16 10 -16 13 0 13 67 0 75 -6 3 -13 -1
+                -16 -9z M1201 1253 c-1 -35 -19 -53 -32 -32 -14 23 -11 -7 10 -91 24 -95 29
+                -95 -75 0 -32 28 -32 28 -30 4 0 -13 4 -24 8 -24 5 0 7 -3 6 -7 -4 -15 23 -53
+                37 -53 23 0 48 -46 40 -71 -7 -22 -8 -22 -21 -4 -25 34 -25 8 0 -39 13 -25 26
+                -40 29 -33 3 9 10 7 25 -7 21 -18 21 -18 15 17 -6 40 15 63 24 26 5 -20 7 -20
+                12 -5 4 9 7 -7 8 -36 1 -29 4 -62 7 -73 2 -11 5 -22 5 -25 1 -3 10 9 20 26 24
+                39 53 42 45 5 -6 -26 -6 -26 10 3 9 15 13 33 9 39 -3 5 -1 7 4 4 6 -4 13 2 16
+                13 3 11 1 23 -4 26 -20 12 -8 23 115 107 8 5 8 9 0 15 -6 4 -16 16 -22 27 -10
+                18 -11 16 -7 -12 3 -26 0 -31 -12 -26 -11 4 -14 2 -9 -5 4 -7 5 -12 1 -12 -3
+                0 -10 10 -15 23 -9 22 -9 22 -9 0 -1 -13 -6 -23 -12 -23 -5 0 -7 6 -3 13 3 6
+                -8 -2 -25 -20 -17 -18 -31 -37 -31 -42 0 -6 -5 -11 -11 -11 -7 0 -9 9 -5 23 3
+                12 6 26 6 30 0 5 4 6 8 3 5 -3 8 8 7 24 -1 17 2 30 7 30 4 0 8 -8 9 -17 0 -15
+                2 -15 8 2 15 36 1 48 -25 24 -13 -13 -21 -25 -16 -28 4 -3 0 -14 -10 -23 -17
+                -17 -18 -15 -18 50 0 80 8 94 49 97 38 3 36 2 45 40 4 17 3 25 -2 18 -8 -13
+                -84 -59 -114 -69 -20 -7 -29 -40 -22 -74 5 -20 3 -22 -5 -10 -6 8 -14 36 -17
+                63 -4 26 -11 50 -15 53 -5 3 -9 10 -9 16 0 6 9 3 21 -7 20 -19 20 -19 10 9 -6
+                15 -11 39 -11 54 0 19 -3 23 -9 13 -7 -11 -9 -11 -14 0 -3 8 -6 0 -6 -18z
+                M1068 1247 c-13 -30 -10 -76 3 -54 6 10 9 30 7 45 -2 23 -4 24 -10 9z M1298
+                1233 c-2 -18 -1 -30 3 -27 4 2 10 -2 13 -8 3 -7 3 -3 0 10 -3 12 -1 22 5 22 6
+                0 11 5 11 11 0 5 -4 8 -9 5 -5 -4 -11 0 -14 6 -2 7 -6 -1 -9 -19z M1762 1118
+                c-7 -7 -12 -38 -12 -69 0 -32 -4 -61 -10 -64 -6 -3 -10 4 -10 17 0 26 -10 42
+                -27 46 -15 2 -17 -14 -3 -23 6 -3 10 -17 10 -30 0 -13 -4 -27 -10 -30 -20 -12
+                -9 -25 15 -19 17 4 25 2 25 -7 1 -10 4 -9 14 3 7 10 16 15 19 11 4 -3 7 3 7
+                15 0 16 -4 20 -16 15 -14 -5 -15 -3 -3 18 16 27 16 30 18 82 1 23 5 36 11 32
+                6 -3 10 -1 10 4 0 15 -23 14 -38 -1z M1056 1065 c8 -37 12 -41 24 -29 5 5 1
+                19 -11 34 -20 25 -20 25 -13 -5z M1584 1058 c-4 -6 -3 -8 3 -5 12 8 26 -20 17
+                -34 -3 -5 3 -9 12 -9 10 0 14 3 11 7 -4 3 -2 12 4 20 9 10 8 13 -5 13 -9 0
+                -16 5 -16 10 0 14 -17 13 -26 -2z M1556 1025 c-11 -8 -17 -15 -13 -15 4 0 1
+                -13 -7 -28 -8 -15 -14 -36 -13 -46 1 -11 -4 -21 -12 -24 -10 -3 -12 0 -8 11 3
+                9 2 19 -3 22 -11 7 -13 -34 -4 -59 15 -40 64 10 64 65 0 41 3 50 15 45 18 -7
+                20 10 3 17 -10 4 -9 8 2 16 8 6 11 11 5 11 -5 -1 -19 -7 -29 -15z M956 992
+                c-9 -15 14 -40 32 -34 6 2 12 -4 12 -13 0 -13 3 -13 21 4 31 28 19 52 -20 41
+                -20 -5 -31 -5 -34 3 -2 8 -6 7 -11 -1z M1071 863 c1 -54 5 -111 9 -128 4 -16
+                5 21 2 83 -4 81 -2 112 6 112 7 0 12 -12 13 -27 1 -28 1 -28 8 -3 9 32 2 68
+                -10 48 -7 -10 -9 -10 -9 0 0 6 -4 12 -10 12 -6 0 -10 -38 -9 -97z M1447 943
+                c-4 -3 -7 -14 -7 -24 0 -12 -5 -16 -14 -13 -9 3 -12 13 -9 22 5 13 3 14 -6 6
+                -10 -9 -10 -17 -1 -34 6 -12 9 -24 6 -28 -3 -3 -6 -1 -6 5 0 6 -7 13 -15 17
+                -16 6 -12 -37 6 -59 4 -6 9 -26 12 -45 4 -34 4 -34 5 7 3 67 16 91 46 86 21
+                -4 25 -2 20 11 -3 9 -10 16 -16 16 -5 0 -6 5 -3 10 3 6 0 10 -7 11 -7 0 -4 4
+                7 9 15 6 16 9 4 9 -9 1 -19 -2 -22 -6z M838 914 c-5 -4 -8 -21 -8 -38 0 -21 3
+                -27 11 -19 6 6 9 23 7 38 -2 15 -6 23 -10 19z M1213 851 c4 -17 3 -20 -8 -11
+                -18 15 -22 -2 -17 -80 6 -99 6 -100 13 -100 4 0 6 -7 5 -16 0 -9 5 -19 13 -22
+                14 -5 7 70 -7 76 -4 1 -6 22 -4 47 2 25 7 43 11 41 4 -3 8 13 9 34 2 21 -3 42
+                -9 46 -9 5 -10 1 -6 -15z M1103 735 c0 -33 2 -45 4 -27 2 18 2 45 0 60 -2 15
+                -4 0 -4 -33z M1274 759 c3 -19 10 -70 16 -113 5 -44 13 -82 16 -85 4 -3 4 17
+                0 44 -4 28 -10 78 -13 113 -3 34 -10 65 -16 69 -6 4 -7 -7 -3 -28z M1133 710
+                c0 -36 2 -50 4 -32 2 17 2 47 0 65 -2 17 -4 3 -4 -33z M1093 663 c-17 -6 -15
+                -49 3 -93 14 -35 14 -35 8 0 -7 39 -7 39 -5 60 1 13 2 13 11 0 8 -12 10 -11
+                10 7 0 24 -9 33 -27 26z M1149 492 c-2 -34 -1 -62 2 -62 10 0 15 61 8 95 -4
+                23 -7 15 -10 -33z M1072 505 c0 -43 14 -152 17 -123 1 11 6 15 16 12 9 -4 15
+                0 16 7 0 8 2 33 5 57 5 33 3 42 -9 42 -9 0 -18 8 -20 18 -3 12 -5 10 -7 -8 -2
+                -24 -3 -24 -10 5 -7 29 -8 28 -8 -10z M1181 400 c-1 -3 -5 -18 -7 -35 -3 -16
+                -10 -35 -15 -42 -7 -8 -7 -18 -1 -29 15 -27 34 17 29 69 -2 23 -5 40 -6 37z
+                M838 276 c-27 -6 -47 -15 -47 -21 1 -5 -16 -18 -37 -27 -39 -18 -39 -18 3 -15
+                24 1 43 5 43 8 0 3 12 4 26 1 18 -3 25 -1 20 6 -3 6 -2 13 4 17 6 4 8 11 5 16
+                -8 11 7 12 37 0 16 -6 27 -4 37 6 12 13 10 14 -19 8 -23 -5 -30 -4 -26 4 4 6
+                6 10 4 10 -2 -1 -24 -6 -50 -13z M1304 267 c0 -16 6 -23 21 -24 20 -2 20 -2 1
+                13 -20 14 -20 14 0 14 16 0 17 2 4 10 -22 14 -26 12 -26 -13z M570 248 c-14
+                -6 -45 -12 -70 -14 -25 -2 -66 -6 -92 -9 -26 -2 -50 0 -53 5 -3 6 -11 10 -16
+                10 -6 0 -7 -4 -4 -10 3 -6 -5 -10 -18 -10 -16 0 -31 -10 -42 -26 -20 -31 -15
+                -37 30 -38 19 -1 35 -4 35 -7 0 -29 756 -50 1205 -33 83 3 168 5 190 4 22 0
+                60 4 85 10 25 6 86 12 135 14 107 4 244 16 264 22 16 5 -22 37 -47 41 -8 1
+                -21 4 -30 8 -27 11 -252 15 -252 5 0 -5 12 -16 28 -24 27 -15 26 -15 -33 -18
+                -33 -1 -91 -4 -130 -5 -167 -7 -612 -9 -630 -3 -36 13 -124 20 -129 11 -3 -5
+                -31 -7 -62 -5 -34 2 -69 -2 -90 -11 -19 -8 -34 -10 -34 -4 0 5 6 9 13 10 6 0
+                1 5 -12 10 -13 5 -32 7 -42 4 -10 -3 -30 0 -45 8 -20 10 -38 12 -66 5 -56 -12
+                -99 10 -51 26 23 8 30 15 24 25 -7 10 -10 10 -16 1 -5 -7 -10 -8 -14 -2 -4 6
+                -15 6 -31 0z"/>
+                  </g>
+                  <g transform="translate(0.000000,250.000000) scale(0.100000,-0.100000)" fill="#ffffff" opacity="0.28">
+                    <path d="M314 2209 c1 -12 -5 -24 -13 -27 -8 -2 -11 0 -8 5 3 5 -1 10 -9 10
+                -8 0 -13 -5 -11 -11 2 -6 14 -11 28 -11 25 0 39 29 22 46 -6 6 -9 1 -9 -12z
+                M2116 2213 c8 -29 -16 -40 -33 -17 -14 19 -15 19 -11 -1 4 -27 51 -28 56 -1 2
+                10 -1 23 -7 29 -7 7 -8 4 -5 -10z M1309 1423 c-5 -53 -4 -165 2 -175 5 -7 9
+                28 9 85 0 77 -6 130 -11 90z M1035 1377 c-5 -7 -9 -32 -8 -57 4 -122 4 -117
+                13 -93 5 11 8 46 7 75 -2 38 1 55 10 55 7 0 11 -3 9 -6 -2 -3 0 -33 6 -66 12
+                -76 -6 -149 -33 -134 -10 5 -24 7 -31 4 -18 -7 -113 66 -98 75 7 4 4 15 -9 31
+                -20 24 -20 24 -21 -8 0 -27 -4 -33 -22 -33 -29 0 -18 -9 15 -12 25 -2 32 -10
+                28 -31 -1 -5 3 -6 9 -2 5 3 10 -1 10 -9 0 -9 5 -16 10 -16 6 0 10 4 10 10 0
+                16 98 -49 125 -83 21 -27 23 -34 10 -43 -8 -6 -12 -14 -8 -18 4 -4 0 -4 -10 0
+                -9 3 -17 12 -17 20 0 9 -11 14 -31 14 -16 0 -28 4 -25 8 3 5 -6 16 -20 26 -13
+                11 -24 27 -24 37 0 21 -16 26 -22 7 -3 -9 -13 -7 -34 7 -16 10 -31 18 -33 16
+                -2 -1 -7 1 -10 6 -10 15 -71 55 -71 47 0 -4 -11 3 -24 15 -19 18 -31 22 -53
+                16 -28 -7 -28 -7 16 -23 43 -17 72 -45 59 -58 -4 -3 -38 10 -75 31 -71 39
+                -124 48 -146 26 -10 -11 -8 -13 11 -8 25 6 82 -18 96 -41 6 -10 10 -11 15 -3
+                5 8 23 5 62 -13 30 -13 62 -26 73 -30 10 -4 16 -12 13 -20 -3 -8 0 -20 8 -26
+                11 -9 13 -6 10 15 -3 33 37 28 73 -10 22 -24 31 -62 12 -50 -6 4 -7 12 -4 18
+                5 9 3 9 -6 0 -11 -10 -11 -15 1 -30 13 -16 12 -17 -3 -5 -9 8 -22 11 -28 7 -9
+                -5 -15 15 -11 38 1 5 -3 6 -9 2 -14 -9 -12 -35 5 -69 8 -15 15 -49 15 -74 0
+                -59 -10 -49 -12 12 -1 48 -18 77 -18 30 0 -21 -3 -24 -14 -15 -8 7 -13 19 -11
+                29 1 9 0 11 -2 5 -5 -16 -9 -16 -34 -2 -18 9 -19 8 -8 -9 9 -14 9 -27 1 -50
+                -6 -17 -7 -34 -3 -37 5 -2 6 -48 3 -101 -4 -71 -2 -95 6 -90 9 5 12 -24 11
+                -103 0 -116 8 -181 22 -181 11 0 -1 -54 -13 -58 -4 -2 -8 -12 -8 -22 0 -11
+                -14 -24 -37 -34 -21 -9 -48 -23 -60 -32 -23 -16 -23 -16 -23 20 0 20 5 36 10
+                36 6 0 10 31 11 73 0 110 16 175 19 82 6 -178 18 -106 20 120 1 138 2 271 3
+                296 0 56 -9 83 -24 73 -7 -4 -9 -3 -6 2 3 6 2 16 -4 24 -5 8 -9 10 -9 5 0 -15
+                -40 -16 -41 -2 -1 7 -2 17 -3 22 0 6 -11 24 -23 40 -22 30 -22 30 -23 -315 0
+                -384 12 -503 20 -200 6 195 6 195 8 -22 1 -131 6 -219 12 -223 25 -15 9 -44
+                -32 -57 -58 -20 -24 -44 40 -30 28 7 46 5 66 -5 15 -8 35 -11 45 -8 10 3 29 1
+                42 -4 13 -5 18 -10 12 -10 -7 -1 -13 -5 -13 -10 0 -6 15 -4 34 4 22 9 56 13
+                91 11 46 -3 58 -1 69 15 10 15 15 16 19 7 2 -8 21 -15 41 -16 20 -2 48 -7 61
+                -12 16 -6 25 -6 25 1 0 6 6 6 18 1 15 -8 383 -7 587 1 210 8 193 6 163 23 -16
+                8 -28 19 -28 25 0 5 -2 171 -5 369 -4 298 -3 358 8 354 25 -9 39 -678 15 -702
+                -9 -9 -8 -12 4 -12 25 0 27 36 21 406 -6 352 -6 352 -41 335 -34 -16 -34 -16
+                -29 -233 3 -124 1 -215 -4 -212 -5 3 -9 -2 -9 -10 0 -9 4 -16 9 -16 4 0 9 -61
+                10 -135 2 -136 -11 -182 -22 -82 -10 79 -17 639 -8 587 8 -45 8 -45 9 13 1 32
+                -2 56 -7 53 -5 -3 -11 0 -13 7 -22 64 3 211 26 151 4 -9 2 -12 -5 -8 -7 4 -9
+                0 -5 -14 4 -11 2 -23 -4 -27 -19 -12 -11 -26 9 -15 14 7 22 7 26 0 4 -6 10 -8
+                14 -6 10 6 1 66 -9 66 -12 0 -5 49 9 63 8 8 11 0 11 -34 0 -24 5 -51 11 -59 8
+                -11 9 1 6 45 -2 33 -2 54 1 47 3 -10 7 -10 18 -1 10 8 11 16 4 30 -8 14 -6 20
+                7 28 17 9 17 10 0 17 -10 4 -25 0 -35 -9 -21 -19 -88 -47 -122 -51 -14 -2 -37
+                -7 -52 -11 -24 -6 -26 -5 -24 25 1 17 -1 33 -6 36 -4 3 -8 1 -8 -4 0 -5 -9
+                -12 -21 -15 -12 -3 -18 -10 -14 -16 3 -6 1 -11 -5 -11 -7 0 -10 -7 -6 -15 3
+                -9 0 -15 -9 -15 -9 0 -15 10 -16 28 -1 27 -1 27 -11 -2 -8 -22 -7 -30 3 -37
+                10 -6 8 -9 -9 -9 -12 0 -25 -7 -28 -15 -4 -8 -12 -15 -19 -15 -7 0 -16 -11
+                -19 -25 -4 -14 -11 -23 -16 -20 -6 3 -10 1 -10 -5 0 -6 -5 -8 -10 -5 -6 3 -16
+                0 -23 -7 -8 -7 -39 -31 -70 -52 -57 -39 -65 -50 -48 -60 5 -3 7 -15 4 -26 -3
+                -11 -10 -17 -16 -13 -5 3 -7 1 -4 -4 4 -6 0 -24 -9 -39 -16 -29 -16 -29 -10
+                -3 8 37 -21 34 -45 -5 -10 -17 -19 -29 -20 -26 0 3 -3 19 -5 37 -14 95 -50
+                154 -48 77 1 -34 1 -34 -19 -17 -15 14 -21 15 -25 5 -2 -8 -19 17 -37 55 -38
+                78 -37 88 5 48 20 -19 30 -24 30 -14 0 21 -29 59 -45 59 -14 0 -41 38 -37 53
+                1 4 -1 7 -6 7 -4 0 -8 12 -8 28 -1 15 1 21 3 15 12 -33 23 -7 24 55 1 68 16
+                145 18 94 1 -13 5 -20 11 -17 6 4 18 -11 27 -34 17 -43 40 -58 27 -18 -16 53
+                -34 88 -43 83 -5 -4 -12 -2 -16 4 -4 6 -11 8 -16 5 -5 -4 -18 10 -30 29 -23
+                39 -29 42 -44 23z m725 -258 c0 6 9 11 20 11 11 0 20 -5 20 -11 0 -5 -4 -7
+                -10 -4 -6 4 -10 -9 -11 -32 -2 -67 -16 -103 -31 -81 -8 10 -9 10 -5 -2 2 -8
+                12 -14 21 -14 10 1 16 -6 16 -19 0 -11 -3 -17 -7 -14 -3 4 -12 -1 -19 -11 -10
+                -12 -13 -13 -14 -3 0 9 -8 11 -25 7 -24 -6 -35 7 -15 19 17 10 11 55 -7 62
+                -26 9 -33 24 -22 45 6 10 7 23 4 28 -3 6 -2 10 4 10 5 0 11 -15 13 -32 3 -32
+                18 -42 27 -17 2 6 -1 9 -7 5 -7 -4 -10 4 -9 21 2 31 25 46 45 31 8 -7 12 -7
+                12 1z m-101 -106 c1 -48 -2 -83 -6 -79 -4 4 -8 20 -9 34 -2 60 -4 73 -14 67
+                -6 -4 -8 -11 -5 -16 4 -5 -3 -9 -14 -9 -12 0 -21 -4 -21 -9 0 -5 7 -8 16 -7
+                10 0 18 -8 20 -21 4 -24 -11 -32 -19 -10 -3 6 -6 0 -6 -15 -1 -44 -21 -32 -21
+                12 0 22 -4 40 -10 40 -5 0 -10 -22 -10 -50 0 -45 -3 -51 -30 -65 -16 -9 -30
+                -12 -30 -8 0 5 -14 8 -32 7 -37 -1 -47 -18 -46 -84 0 -41 1 -42 8 -15 7 26 8
+                23 8 -20 1 -48 1 -49 -13 -25 -8 14 -14 39 -15 56 0 16 -4 34 -9 40 -18 20
+                -22 64 -5 57 13 -5 15 -2 10 15 -4 12 -2 23 5 28 8 5 10 2 6 -9 -3 -9 0 -18 9
+                -21 17 -6 19 25 3 41 -7 7 -3 9 15 6 20 -4 31 1 47 21 25 32 39 33 32 4 -3
+                -18 -2 -20 6 -8 5 9 11 22 13 30 3 17 28 39 43 40 6 0 3 -4 -5 -10 -19 -12 -8
+                -22 14 -14 15 6 15 8 1 24 -17 18 -11 30 15 30 10 0 23 7 30 15 7 8 13 15 15
+                15 1 0 3 -39 4 -87z m-664 5 c17 -10 29 -22 28 -27 -1 -5 5 -8 15 -7 19 1 27
+                -25 16 -62 -7 -27 -8 -27 -13 7 -6 33 -7 34 -23 17 -16 -15 -18 -15 -18 -2 0
+                22 -17 20 -23 -1 -4 -14 -5 -12 -6 5 0 12 -5 22 -11 22 -5 0 -10 19 -10 43 0
+                23 4 38 8 32 4 -5 21 -18 37 -27z m121 -75 c-3 -7 0 -12 6 -10 19 4 25 -44 20
+                -163 -5 -146 -12 -155 -12 -18 0 124 -9 189 -21 148 -7 -25 -7 -25 -8 3 -1 15
+                -6 27 -13 27 -8 0 -10 -31 -6 -112 3 -62 2 -99 -2 -83 -20 79 -8 260 14 213 3
+                -7 4 1 1 17 -5 29 -5 29 10 10 9 -11 13 -25 11 -32z m-275 -86 c-8 -8 -11 -2
+                -11 19 0 40 14 54 18 19 2 -15 -1 -32 -7 -38z m152 -159 c-4 -264 -10 -335
+                -34 -359 -27 -27 -39 -24 -38 9 0 24 1 25 9 7 6 -15 9 -6 9 32 1 74 14 100 22
+                43 3 -25 7 69 7 208 2 194 5 252 15 252 9 0 11 -44 10 -192z m237 121 c0 -22
+                -4 -38 -9 -35 -5 3 -11 -14 -13 -39 -4 -54 9 -61 15 -7 2 20 4 -3 5 -53 2 -84
+                1 -88 -14 -67 -8 12 -12 27 -9 32 3 6 2 10 -2 10 -9 0 -9 0 -15 100 -5 78 -1
+                95 17 80 11 -9 12 -6 8 11 -4 15 -3 20 5 15 7 -4 12 -25 12 -47z m144 0 c-1
+                -28 -5 -53 -7 -55 -6 -6 -7 69 -1 89 9 30 12 19 8 -34z m-657 -141 c-2 -29 -3
+                -6 -3 52 0 58 1 81 3 53 2 -29 2 -77 0 -105z m390 30 c-2 -18 -4 -6 -4 27 0
+                33 2 48 4 33 2 -15 2 -42 0 -60z m186 10 c3 -35 9 -85 13 -113 4 -27 4 -47 0
+                -44 -3 3 -11 41 -16 85 -6 43 -13 94 -16 113 -4 21 -3 32 3 28 6 -4 13 -35 16
+                -69z m-174 -81 c0 -13 -3 -16 -6 -8 -11 27 -21 -11 -12 -43 5 -17 9 -44 10
+                -61 1 -30 1 -30 10 -5 7 21 7 -31 -1 -129 0 -2 -7 -1 -15 3 -12 4 -15 -3 -15
+                -32 0 -38 -21 -119 -39 -150 -11 -17 -9 13 5 78 3 14 8 77 11 140 5 81 9 106
+                14 85 4 -17 6 7 3 54 -3 59 0 87 8 92 17 11 28 1 27 -24z m508 -59 c-2 -18 -4
+                -6 -4 27 0 33 2 48 4 33 2 -15 2 -42 0 -60z m-60 -75 c-2 -21 -4 -6 -4 32 0
+                39 2 55 4 38 2 -18 2 -50 0 -70z m-332 -95 c4 -73 5 -131 2 -128 -3 3 -8 41
+                -11 85 -16 222 -16 230 -7 203 5 -15 12 -87 16 -160z m-73 55 c-7 -59 -17 -35
+                -13 29 3 48 6 56 10 33 4 -16 5 -45 3 -62z m561 -70 c3 -68 2 -123 -2 -123 -4
+                0 -9 57 -10 127 -3 160 4 157 12 -4z m-150 2 c4 -39 3 -54 -3 -45 -9 14 -15
+                119 -6 109 2 -2 6 -31 9 -64z m76 24 c-2 -22 1 -43 7 -47 18 -12 5 -82 -15
+                -82 -28 0 -41 22 -41 69 0 34 3 42 10 31 8 -12 10 -9 10 13 0 16 4 26 10 22 6
+                -3 10 3 10 14 0 12 3 21 6 21 3 0 4 -18 3 -41z m-360 -21 c-1 -55 -5 -50 -11
+                15 -2 20 0 37 4 37 4 0 7 -24 7 -52z m-110 -103 c-19 -61 -54 -103 -84 -101
+                -18 1 -24 5 -19 16 3 8 8 27 11 43 7 35 23 45 24 15 0 -13 5 -32 10 -43 6 -14
+                7 -1 3 40 -6 67 12 137 26 100 4 -11 5 -25 3 -31 -2 -7 -1 -14 4 -17 5 -3 10
+                4 11 16 1 12 4 31 6 42 3 11 6 31 7 45 2 14 4 0 7 -30 2 -30 -2 -73 -9 -95z
+                m299 73 c13 -32 2 -36 -24 -11 -10 10 -12 19 -6 21 6 2 8 11 5 20 -9 27 11 1
+                25 -30z m280 -45 c5 -35 5 -63 1 -63 -13 0 -19 30 -18 88 1 67 6 60 17 -25z
+                m-772 -25 c-9 -20 -23 -39 -33 -42 -16 -6 -16 -6 0 12 9 10 22 34 29 52 6 19
+                13 30 15 24 2 -6 -3 -26 -11 -46z m-102 -19 c-4 -8 4 -9 27 -4 30 7 32 6 21
+                -8 -8 -9 -19 -14 -27 -11 -7 3 -16 1 -20 -5 -3 -6 -15 -11 -26 -11 -11 0 -17
+                -4 -14 -10 3 -6 -4 -10 -17 -11 -13 0 -43 -3 -68 -5 -45 -4 -45 -4 -6 13 21
+                10 38 23 37 28 0 6 20 15 47 21 26 7 48 12 50 13 2 0 0 -4 -4 -10z m442 3 c11
+                -8 12 -87 1 -98 -14 -14 -21 7 -9 27 12 19 8 44 -7 35 -4 -3 -8 6 -9 20 -2 25
+                5 29 24 16z m-388 -62 c-7 -11 -16 -20 -20 -20 -3 0 -15 -3 -25 -7 -23 -9 0
+                16 32 35 27 15 27 15 13 -8z m447 9 c-4 -5 1 -20 12 -31 17 -21 17 -21 0 -15
+                -10 4 -21 7 -23 7 -2 0 -4 11 -4 25 0 14 5 25 11 25 5 0 7 -5 4 -11z M1221
+                1331 c-18 -12 -23 -40 -11 -60 7 -12 9 -10 10 12 0 16 4 26 10 22 6 -3 10 3
+                10 14 0 24 0 24 -19 12z M1449 1288 c-19 -24 -33 -47 -31 -51 1 -5 -2 -6 -8
+                -2 -5 3 -10 -1 -10 -10 0 -9 -4 -14 -9 -11 -4 3 -6 -5 -4 -18 5 -24 -34 -45
+                -57 -31 -11 7 -30 -26 -30 -50 0 -14 4 -13 20 6 21 25 22 16 4 -52 -3 -9 2
+                -16 10 -16 9 0 13 4 11 8 -3 3 2 12 10 19 8 7 15 19 15 28 0 19 64 103 119
+                157 37 35 55 65 32 50 -5 -3 -12 -1 -16 5 -11 17 -20 11 -56 -32z M1368 1281
+                c-19 -23 -23 -80 -3 -59 15 16 37 78 27 78 -4 0 -15 -8 -24 -19z M1786 1212
+                c-4 -13 -6 -26 -3 -29 9 -9 48 8 41 18 -3 5 -9 7 -14 4 -5 -3 -10 3 -12 12 -3
+                15 -6 14 -12 -5z M1552 1123 c-6 -2 -10 -9 -7 -13 3 -5 1 -11 -5 -15 -5 -3
+                -10 -1 -10 6 0 8 -3 9 -13 0 -8 -6 -18 -7 -22 -3 -5 4 -5 -1 -2 -10 3 -10 2
+                -20 -3 -23 -4 -3 -10 1 -13 7 -2 7 -8 10 -12 6 -34 -32 16 -34 60 -2 60 42 74
+                66 27 47z M2047 1083 c-5 -13 -15 -23 -22 -23 -8 0 -16 -4 -19 -9 -3 -5 2 -8
+                12 -7 10 0 16 -5 13 -14 -14 -59 -13 -84 3 -71 22 19 23 -41 0 -63 -8 -9 -11
+                -16 -6 -16 16 0 34 -589 19 -635 -5 -16 -2 -21 13 -22 11 -1 18 2 15 7 -3 4 2
+                24 10 44 8 19 15 47 15 61 0 14 7 28 15 31 16 7 21 49 6 58 -4 3 -6 -6 -3 -21
+                3 -16 1 -24 -5 -20 -13 8 -31 229 -34 430 0 42 -5 77 -10 77 -4 0 -10 48 -11
+                108 -2 70 -6 99 -11 85z m36 -628 c3 -66 1 -129 -3 -140 -5 -12 -9 39 -9 124
+                -1 174 5 182 12 16z M1444 1055 c5 -15 4 -16 -9 -5 -13 10 -15 9 -15 -9 0 -19
+                3 -20 20 -11 23 12 26 25 8 36 -8 5 -9 2 -4 -11z M543 1033 c-6 -333 -17 -631
+                -24 -650 -14 -38 -10 -51 6 -18 14 29 14 28 13 -35 0 -36 -5 -71 -11 -78 -19
+                -24 -29 -11 -25 33 2 25 0 45 -3 45 -10 0 -20 -60 -12 -72 4 -7 -4 -9 -21 -6
+                -14 3 -26 1 -26 -4 0 -5 -4 -7 -9 -4 -5 3 -12 -1 -15 -10 -3 -8 -2 -13 2 -10
+                5 3 28 6 53 7 86 3 89 6 89 60 0 27 4 49 8 49 10 0 26 504 23 678 -1 52 -47
+                67 -48 15z M2116 1041 c-4 -5 -3 -16 0 -24 3 -8 1 -18 -5 -21 -5 -4 -13 4 -17
+                16 -6 22 -7 22 -14 4 -3 -11 -1 -36 6 -55 7 -20 14 -74 15 -121 3 -85 3 -85 9
+                15 6 93 6 96 10 35 3 -64 3 -64 10 30 5 66 4 97 -4 103 -8 5 -6 10 4 17 9 6
+                10 10 3 10 -6 0 -14 -4 -17 -9z M1969 943 c4 -15 9 -70 10 -122 1 -51 7 -103
+                12 -115 6 -14 8 9 7 74 -1 52 3 104 7 114 6 13 4 21 -3 24 -7 2 -12 9 -12 17
+                0 7 -7 18 -15 25 -12 10 -13 7 -6 -17z M1994 570 c0 -63 1 -89 3 -57 2 31 2
+                83 0 115 -2 31 -3 5 -3 -58z M2004 340 c0 -58 1 -81 3 -52 2 28 2 76 0 105 -2
+                28 -3 5 -3 -53z M1890 140 c-55 -7 -55 -7 0 -8 30 -1 62 3 70 8 17 11 21 11
+                -70 0z"/>
+                  </g>
+                </svg>
+            </div>
+            <div class="prangariya-name">Prāngārīya</div>
+            <div class="prangariya-name-hindi">प्रां गा री या</div>
+            <p class="prangariya-essence">A focused changemaker in, of, and about all things carbon.</p>
+            <p class="prangariya-essence">Prāngārīya means "of carbon essence" — a modern coinage rooted in one of the oldest languages on earth, for one of the most urgent problems of this century.</p>
+            <p class="prangariya-etymology">From Sanskrit: <em>Pra-</em> (प्र, forward, eminent) and <em>Aṅgāra</em> (अङ्गार, charcoal, ember — the elemental form of carbon).</p>
+        </div>
+
+        <div class="prangariya-branches">
+            <div class="prangariya-branch">
+                <div class="prangariya-branch-name">1.5<sup>°</sup> Analytics</div>
+                <div class="prangariya-branch-tag live">Active</div>
+                <p class="prangariya-branch-desc">Sovereign and sub-sovereign climate analytics, ratings and relativities for Indian, Southeast Asian and global sovereigns and markets. Translating climate trajectories into credit risk signals across 150+ country portfolios.</p>
+            </div>
+            <div class="prangariya-branch">
+                <div class="prangariya-branch-name">Agni Pariksha</div>
+                <div class="prangariya-branch-tag live">Active</div>
+                <p class="prangariya-branch-desc">Climate scenario design and transition risk quantification for banks, NBFCs, asset managers, and corporate treasuries. We build the analytical frameworks that translate India's carbon transition into credit trajectories, capital reserve calculations, and portfolio-level risk signals.</p>
+            </div>
+            <div class="prangariya-branch active">
+                <div class="prangariya-branch-name">Zero Carbon</div>
+                <div class="prangariya-branch-tag">You are here</div>
+                <p class="prangariya-branch-desc">Industrial decarbonisation and compliance. CCTS, CBAM, MACC roadmaps, and climate risk analytics — taking India's carbon-intensive industries toward zero.</p>
+            </div>
+            <div class="prangariya-branch">
+                <div class="prangariya-branch-name">Carbon Offsets</div>
+                <div class="prangariya-branch-tag dev">In Development</div>
+                <p class="prangariya-branch-desc">Credit origination, verification, and market infrastructure. Project development across BEE and international methodologies, credit pipeline management, and quality assessment.</p>
+            </div>
+            <div class="prangariya-branch">
+                <div class="prangariya-branch-name">Green Carbon</div>
+                <div class="prangariya-branch-tag dev">In Development</div>
+                <p class="prangariya-branch-desc">Nature-based carbon and ecosystem solutions. Natural capital advisory, ecosystem restoration, mangrove and soil carbon programmes, and biodiversity credit structuring.</p>
+            </div>
+            <div class="prangariya-branch">
+                <div class="prangariya-branch-name">Off Carbon</div>
+                <div class="prangariya-branch-tag dev">In Development</div>
+                <p class="prangariya-branch-desc">Energy transition and clean technology advisory. Clean energy procurement, green hydrogen feasibility, electrification roadmaps, and fuel-switching strategies.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact">
+    <div class="section-label section-label--right reveal"><span>Contact</span><div class="section-label-line"></div></div>
+    <div class="contact-layout">
+        <div class="contact-info reveal">
+            <h2>Start with a free CCTS compliance assessment</h2>
+            <p>Whether you're an obligated entity facing your first compliance cycle, an exporter 
+            navigating CBAM, or an industrial group seeking strategic decarbonisation guidance — 
+            we'd like to hear from you.</p>
+
+            <div class="contact-detail">
+                <div class="label">Email</div>
+                <a href="/cdn-cgi/l/email-protection#0f666169604f756a7d60226c6e7d6d6061216a6e7d7b67"><span class="__cf_email__" data-cfemail="3d54535b527d47584f52105e5c4f5f525313585c4f4955">[email&#160;protected]</span></a>
+            </div>
+            <div class="contact-detail">
+                <div class="label">Location</div>
+                <span>Delhi, India</span>
+            </div>
+            <div class="contact-detail">
+                <div class="label">Focus Sectors</div>
+                <span>Cement · Iron & Steel · Fertiliser · Textiles · Auto Components · Aluminium</span>
+            </div>
+        </div>
+
+        <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Company name">
+            </div>
+            <div class="form-group">
+                <label for="interest">Area of Interest</label>
+                <select id="interest" name="interest">
+                    <option value="">Select a service area</option>
+                    <option value="ccts">CCTS Compliance Readiness</option>
+                    <option value="cbam">CBAM Compliance & Documentation</option>
+                    <option value="macc">Decarbonisation Roadmap & MACC</option>
+                    <option value="offset">Offset Project Origination</option>
+                    <option value="scope3">Value Chain & Scope 3 Advisory</option>
+                    <option value="mrv">Carbon Accounting & MRV</option>
+                    <option value="analytics">Climate Analytics & Scenario Modelling</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Tell us about your carbon compliance or decarbonisation needs..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message →</button>
+        </form>
+    </div>
+</section>
+
+<!-- ========== CTA BANNER ========== -->
+<div class="cta-banner">
+    <h2>The window is 18–36 months.</h2>
+    <p>The premium for strategic positioning in India's carbon market diminishes as frameworks mature. Move now.</p>
+    <a href="#contact" class="btn-dark">Request Your Free Assessment →</a>
+</div>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+    <div class="footer-top">
+        <a href="#" class="logo">
+            <div class="logo-main">
+                <div class="logo-mark"></div>
+                <div class="logo-text">Zero Carbon</div>
+            </div>
+            <div class="logo-sub">
+                <span class="logo-sub-part">part of</span>
+                <span class="logo-sub-name">Prāngārīya</span>
+                <span class="logo-sub-sep">|</span><span class="logo-sub-hindi">प्रां गा री या</span>
+            </div>
+        </a>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h5>Services</h5>
+                <a href="#services">CCTS Compliance</a>
+                <a href="#services">CBAM Advisory</a>
+                <a href="#services">MACC Roadmaps</a>
+                <a href="#services">Offset Origination</a>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <a href="#about">About</a>
+                <a href="#insights">Insights</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h5>Sectors</h5>
+                <a href="#sectors">Cement</a>
+                <a href="#sectors">Iron & Steel</a>
+                <a href="#sectors">Textiles</a>
+                <a href="#sectors">Auto Components</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 zero-carbon.earth. All rights reserved.</p>
+        <p>Delhi, India · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ddb4b3bbb29da7b8afb2f0bebcafbfb2b3f3b8bcafa9b5">[email&#160;protected]</a></p>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('open');
+        });
+    });
+
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Form handler (placeholder)
+    function handleSubmit(e) {
+        e.preventDefault();
+        const btn = e.target.querySelector('.form-submit');
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Message Sent';
+        btn.style.background = '#00a844';
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            e.target.reset();
+        }, 3000);
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href === '#') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const target = document.querySelector(href);
+                if (target) {
+                    const navHeight = document.getElementById('navbar').offsetHeight;
+                    const targetPos = target.getBoundingClientRect().top + window.scrollY - navHeight;
+                    window.scrollTo({ top: targetPos, behavior: 'smooth' });
+                }
+            }
+            // Close mobile menu after any link click
+            navLinks.classList.remove('open');
+        });
+    });
+</script>
+
+</body>
+</html>
