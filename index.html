@@ -929,86 +929,6 @@
             line-height: 1.6;
         }
 
-        /* ========== ABOUT ========== */
-        #about {
-            background: var(--dark);
-            position: relative;
-        }
-
-        .about-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: start;
-        }
-
-        .about-content h2 {
-            font-size: clamp(2rem, 3.5vw, 2.8rem);
-            color: var(--white);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-content p {
-            color: var(--silver);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-        }
-
-        .about-content p strong {
-            color: var(--light);
-        }
-
-        .about-pillars {
-            display: flex;
-            flex-direction: column;
-            gap: 1px;
-            background: var(--graphite);
-            border: 1px solid var(--graphite);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .pillar {
-            background: var(--dark);
-            padding: 2rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.25rem;
-            transition: background 0.3s;
-        }
-
-        .pillar:hover {
-            background: var(--carbon);
-        }
-
-        .pillar-icon {
-            width: 36px;
-            height: 36px;
-            border: 1px solid var(--green);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--green);
-            flex-shrink: 0;
-            font-size: 0.85rem;
-        }
-
-        .pillar h4 {
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--white);
-            margin-bottom: 0.35rem;
-        }
-
-        .pillar p {
-            font-size: 0.82rem;
-            color: var(--slate);
-            line-height: 1.5;
-        }
-
         /* ========== PRANGARIYA BLOCK ========== */
         .prangariya-section {
             background: var(--dark);
@@ -1474,7 +1394,6 @@
             .approach-steps { grid-template-columns: 1fr; gap: 2rem; }
             .approach-steps::before { display: none; }
             .service-hero { grid-template-columns: 1fr; }
-            .about-layout { grid-template-columns: 1fr; gap: 3rem; }
             .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
         }
 
@@ -1634,17 +1553,6 @@
                 padding: 0 0.5rem;
             }
 
-            /* About */
-            .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
-
-            .about-content h2 { font-size: 1.8rem; }
-
-            .about-content p { font-size: 0.9rem; }
-
-            .pillar {
-                padding: 1.5rem;
-            }
-
             /* Insights */
             .insights-grid { grid-template-columns: 1fr; }
 
@@ -1797,7 +1705,6 @@
         <li><a href="#sectors">Sectors</a></li>
         <li><a href="#approach">Approach</a></li>
         <li><a href="#insights">Insights</a></li>
-        <li><a href="#about">About</a></li>
         <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
     </ul>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
@@ -2159,69 +2066,6 @@
                 <div class="insight-date">Coming Soon</div>
                 <h4>CCTS Target-Setting: Reading Between the Lines of BEE's Final Notifications</h4>
                 <p>CEEW's MACC analysis shows most initial targets fall in the negative-cost zone. What this means for credit supply and price formation.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ========== ABOUT ========== -->
-<section id="about">
-    <div class="section-label section-label--center reveal"><div class="section-label-line"></div><span>About</span><div class="section-label-line"></div></div>
-    <div class="about-layout">
-        <div class="about-content reveal">
-            <h2>Built from finance, applied to climate</h2>
-            <p><strong>Zero Carbon</strong> is led by a former financial sector specialist whose career has 
-            spanned <strong>carbon markets, climate risk assessment, and sovereign analysis</strong>. That background 
-            shapes how we approach advisory — less compliance checklist, more economic decision-making.</p>
-            
-            <p>In practice, this means tools like <strong>Marginal Abatement Cost Curves</strong> sit at the centre 
-            of our work — helping clients determine whether to invest in abatement, purchase credits, or originate 
-            offsets based on actual cost-effectiveness rather than instinct.</p>
-
-            <p>Our leadership works closely with <strong>policymakers advancing India's carbon markets framework</strong>, 
-            which gives the firm a grounded view of where CCTS regulation is headed and how scheme design is likely 
-            to evolve. For clients, that translates into advice that accounts for what's coming — not just what's here.</p>
-
-            <p>India needs an estimated <strong>$10.1 trillion in climate investment</strong> by 2070, and a functioning 
-            carbon price is a critical piece of that architecture. We're here to help industrial firms engage with 
-            that transition — practically, and with a clear view of the economics.</p>
-        </div>
-
-        <div class="about-pillars reveal">
-            <div class="pillar">
-                <div class="pillar-icon">₹</div>
-                <div>
-                    <h4>Financial Sector Background</h4>
-                    <p>We approach carbon markets through the lens of risk pricing, portfolio strategy, and capital allocation.</p>
-                </div>
-            </div>
-            <div class="pillar">
-                <div class="pillar-icon">⟡</div>
-                <div>
-                    <h4>Policy Engagement</h4>
-                    <p>Working relationships with policymakers shaping India's carbon markets, giving us a grounded view of regulatory direction.</p>
-                </div>
-            </div>
-            <div class="pillar">
-                <div class="pillar-icon">↗</div>
-                <div>
-                    <h4>MACC-Led Advisory</h4>
-                    <p>Marginal Abatement Cost Curve analysis for mid-tier industrials — a service largely absent in India's current advisory landscape.</p>
-                </div>
-            </div>
-            <div class="pillar">
-                <div class="pillar-icon">◎</div>
-                <div>
-                    <h4>Beyond Compliance</h4>
-                    <p>We look for the revenue, cost savings, and strategic positioning inside the carbon transition — not just the paperwork.</p>
-                </div>
-            </div>
-            <div class="pillar">
-                <div class="pillar-icon">⊕</div>
-                <div>
-                    <h4>Sector Depth</h4>
-                    <p>Deep focus on 2–3 CCTS sectors rather than surface-level coverage across all. We aim to know your industry well.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -2842,7 +2686,6 @@
             </div>
             <div class="footer-col">
                 <h5>Company</h5>
-                <a href="#about">About</a>
                 <a href="#insights">Insights</a>
                 <a href="#contact">Contact</a>
             </div>
