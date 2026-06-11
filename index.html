@@ -125,10 +125,50 @@
             background: linear-gradient(to left, var(--green), transparent);
         }
 
+        /* ========== BETA BANNER ========== */
+        .beta-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+            background: var(--dark);
+            border-bottom: 1px solid var(--graphite);
+            padding: 0.45rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--silver);
+            letter-spacing: 0.02em;
+        }
+
+        .beta-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.15rem 0.5rem;
+            background: var(--amber-dim);
+            border: 1px solid rgba(200,120,0,0.25);
+            border-radius: 2px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--amber);
+        }
+
+        .beta-sep {
+            color: var(--graphite);
+            margin: 0 0.25rem;
+        }
+
         /* ========== NAVIGATION ========== */
         nav {
             position: fixed;
-            top: 0;
+            top: 2.1rem;
             left: 0;
             right: 0;
             z-index: 1000;
@@ -1778,6 +1818,11 @@
 </head>
 <body>
 
+<!-- ========== BETA BANNER ========== -->
+<div class="beta-banner">
+    <span class="beta-tag">Beta</span>
+    <span>Client preview only — experience may vary<span class="beta-sep">·</span>some links are placeholders</span>
+</div>
 <!-- ========== NAVIGATION ========== -->
 <nav id="navbar">
     <a href="#" class="logo">
