@@ -1,7 +1,15 @@
 {
   "name": "zerocarbon",
   "compatibility_date": "2026-06-07",
+  "main": "src/worker.js",
   "assets": {
-    "directory": "./"
-  }
+    "directory": "./",
+    "binding": "ASSETS"
+  },
+  "send_email": [
+    {
+      "name": "SEND_EMAIL",
+      "destination_address": "info@zero-carbon.earth"
+    }
+  ]
 }

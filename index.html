@@ -2963,18 +2963,39 @@
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // Form handler (placeholder)
-    function handleSubmit(e) {
+    // Form handler
+    async function handleSubmit(e) {
         e.preventDefault();
-        const btn = e.target.querySelector('.form-submit');
+        const form = e.target;
+        const btn = form.querySelector('.form-submit');
         const originalText = btn.textContent;
-        btn.textContent = '✓ Message Sent';
-        btn.style.background = '#00a844';
-        setTimeout(() => {
-            btn.textContent = originalText;
-            btn.style.background = '';
-            e.target.reset();
-        }, 3000);
+        const data = Object.fromEntries(new FormData(form).entries());
+
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            if (!res.ok) throw new Error('Request failed');
+
+            btn.textContent = '✓ Message Sent';
+            btn.style.background = '#00a844';
+            form.reset();
+        } catch (err) {
+            btn.textContent = '✗ Failed — try again';
+            btn.style.background = '#c0392b';
+        } finally {
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 3000);
+        }
     }
 
     // Smooth scroll for anchor links
