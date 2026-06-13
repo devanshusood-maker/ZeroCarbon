@@ -5,11 +5,5 @@
   "assets": {
     "directory": "./",
     "binding": "ASSETS"
-  },
-  "send_email": [
-    {
-      "name": "SEND_EMAIL",
-      "destination_address": "info@zero-carbon.earth"
-    }
-  ]
+  }
 }

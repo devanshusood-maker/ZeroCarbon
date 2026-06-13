@@ -1,7 +1,5 @@
-import { EmailMessage } from "cloudflare:email";
-
 const TO_ADDRESS = "info@zero-carbon.earth";
-const FROM_ADDRESS = "noreply@zero-carbon.earth";
+const FROM_ADDRESS = "Zero Carbon Website <noreply@send.zero-carbon.earth>";
 
 export default {
   async fetch(request, env) {
@@ -45,7 +43,7 @@ async function handleContact(request, env) {
   }
 
   const subject = `New contact form submission from ${name}`;
-  const lines = [
+  const text = [
     `Name: ${name}`,
     `Email: ${email}`,
     `Company: ${company || "-"}`,
@@ -55,17 +53,25 @@ async function handleContact(request, env) {
     message || "-",
   ].join("\n");
 
-  const raw = buildRawEmail({
-    from: FROM_ADDRESS,
-    to: TO_ADDRESS,
-    replyTo: email,
-    subject,
-    body: lines,
-  });
-
   try {
-    const message = new EmailMessage(FROM_ADDRESS, TO_ADDRESS, raw);
-    await env.SEND_EMAIL.send(message);
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: FROM_ADDRESS,
+        to: [TO_ADDRESS],
+        reply_to: email,
+        subject,
+        text,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`Resend API error: ${res.status}`);
+    }
   } catch (err) {
     return new Response(JSON.stringify({ error: "Failed to send message. Please try again later." }), {
       status: 502,
@@ -85,21 +91,4 @@ function sanitize(value) {
 
 function isValidEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-function buildRawEmail({ from, to, replyTo, subject, body }) {
-  const encodedSubject = `=?UTF-8?B?${btoa(unescape(encodeURIComponent(subject)))}?=`;
-  const encodedBody = btoa(unescape(encodeURIComponent(body)));
-
-  return [
-    `From: Zero Carbon Website <${from}>`,
-    `To: ${to}`,
-    `Reply-To: ${replyTo}`,
-    `Subject: ${encodedSubject}`,
-    "MIME-Version: 1.0",
-    "Content-Type: text/plain; charset=UTF-8",
-    "Content-Transfer-Encoding: base64",
-    "",
-    encodedBody,
-  ].join("\r\n");
 }
